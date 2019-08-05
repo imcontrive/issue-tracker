@@ -50,24 +50,4 @@ $ npm start
 - public
     - contains static assets in express
 
-- routes
-    - route handler for node application
 
-- views
-    - for express templates
-
-- .babelrc
-    - transpiler for react and ES6 codes
-
-- .gitignore
-    - ignore node_modules and bundles
-  
-- app.js
-    - entry point for express application
-
-- package.json
-    - project metadata and dependencies list
-
-- webpack.config.js
-    - bundler for react application
-  
