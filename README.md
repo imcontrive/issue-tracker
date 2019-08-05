@@ -1,10 +1,12 @@
-# react-node-boilerplate
-A simple boilerplate for creating full stack application in javascript using react for client side and node/express as backend for creating APIs. 
+# Issue Tracker
+A simple issue tracker for altcampus. 
 
-## Quick Start
+## Collaborators
 
-  The quickest way to get started with this boilerplate is to fork it into your own repo.
-  Get into the root of the application
+### Shubham Pandey(@imcontrive) Project Manager
+### Amit kumar(@amitg01) Front-end lead
+### Rajesh Mule(@Rajesh Mule)  UI designer
+
 
 ```bash
 cd react-node-boilerplate/
