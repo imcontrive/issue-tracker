@@ -63,5 +63,5 @@ $ npm start
   - user is educated but not tech-savvy
   - user mostly prefers to browse the internet on his mobile phone
 - Story
-  - As an admin, I can access and monitor all the issues at one place,so that I can manage and resolve issues with ease
-
+  - As an admin, I can access and monitor all the issues at one place, so that I can manage and resolve issues with ease
+  
