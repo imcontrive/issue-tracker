@@ -4,7 +4,7 @@ A simple issue tracker for altcampus.
 ## Collaborators
 
 ### Shubham Pandey(@imcontrive) Project Manager
-### Amit kumar(@amitg01) Front-end lead
+### Amit kumar Gupta(@amitg01) Front-end lead
 ### Rajesh Mule(@Rajesh Mule)  UI designer
 
 
@@ -64,4 +64,6 @@ $ npm start
   - user mostly prefers to browse the internet on his mobile phone
 - Story
   - As an admin, I can access and monitor all the issues at one place, so that I can manage and resolve issues with ease
-  
+
+# Flow Chart
+![flow chart](https://github.com/imcontrive/issue-tracker/blob/develop/public/images/issueTracker.png)

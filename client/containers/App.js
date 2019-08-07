@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "../scss/index.scss";
 import { getCurrentUser, noToken } from "../actions";
 
@@ -28,9 +28,11 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Route exact path="/" component={HomePage} />
-        <Route path="/Login" component={Login} />
-        <Route path="/Signup" component={Signup} />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/Login" component={Login} />
+            <Route path="/Signup" component={Signup} />
+          </Switch>
       </div>
     );
   }
