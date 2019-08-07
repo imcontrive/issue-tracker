@@ -4,7 +4,7 @@ A simple issue tracker for altcampus.
 ## Collaborators
 
 ### Shubham Pandey(@imcontrive) Project Manager
-### Amit kumar(@amitg01) Front-end lead
+### Amit kumar Gupta(@amitg01) Front-end lead
 ### Rajesh Mule(@Rajesh Mule)  UI designer
 
 
