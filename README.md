@@ -66,4 +66,4 @@ $ npm start
   - As an admin, I can access and monitor all the issues at one place, so that I can manage and resolve issues with ease
 
 # Flow Chart
-[flow chart](https://github.com/imcontrive/issue-tracker/blob/develop/public/images/issueTracker.png)
+![flow chart](https://github.com/imcontrive/issue-tracker/blob/develop/public/images/issueTracker.png)
