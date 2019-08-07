@@ -57,11 +57,11 @@ $ npm start
   - user is educated and tech-savvy
 - Story
   - As a user, I can raise issues from a single portal and track it, so that my issues are resolved swiftly
- ## Admin
- - Persona
+## Admin
+- Persona
   - user is a 30-35 year old
   - user is educated but not tech-savvy
   - user mostly prefers to browse the internet on his mobile phone
- - Story
+- Story
   - As an admin, I can access and monitor all the issues at one place,so that I can manage and resolve issues with ease
 
