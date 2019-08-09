@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import '../scss/index.scss';
-import { getCurrentUser, noToken } from '../actions'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import "../scss/index.scss";
+import { getCurrentUser, noToken } from "../actions";
 
-
-
-import HomePage from '../components/HomePage';
+import HomePage from "../components/HomePage";
+import Header from "../components/Header";
+import Login from "../components/Login";
+import Signup from "../components/Signup";
 
 class App extends Component {
-  state = { 
+  state = {
     token: ""
-  }
+  };
 
   componentDidMount() {
-    var token = localStorage.getItem('authToken') || '';
-    if(token) {
-      this.setState({token: token})
-      this.props.dispatch(getCurrentUser())
+    var token = localStorage.getItem("authToken") || "";
+    if (token) {
+      this.setState({ token: token });
+      this.props.dispatch(getCurrentUser());
     } else {
       this.props.dispatch(noToken());
     }
@@ -26,22 +27,21 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={HomePage} />
+        <Header />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/Login" component={Login} />
+            <Route path="/Signup" component={Signup} />
+          </Switch>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     currentUser: state.currentUser.user
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(App);
-
-
-
-
-
-  

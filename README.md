@@ -4,7 +4,7 @@ A simple issue tracker for altcampus.
 ## Collaborators
 
 ### Shubham Pandey(@imcontrive) Project Manager
-### Amit kumar(@amitg01) Front-end lead
+### Amit kumar Gupta(@amitg01) Front-end lead
 ### Rajesh Mule(@Rajesh Mule)  UI designer
 
 
@@ -49,5 +49,21 @@ $ npm start
 
 - public
     - contains static assets in express
+    
+# User Story and Persona
+## Student 
+- Persona
+  - user is a 18-30 year old
+  - user is educated and tech-savvy
+- Story
+  - As a user, I can raise issues from a single portal and track it, so that my issues are resolved swiftly
+## Admin
+- Persona
+  - user is a 30-35 year old
+  - user is educated but not tech-savvy
+  - user mostly prefers to browse the internet on his mobile phone
+- Story
+  - As an admin, I can access and monitor all the issues at one place, so that I can manage and resolve issues with ease
 
-
+# Flow Chart
+![flow chart](https://github.com/imcontrive/issue-tracker/blob/develop/public/images/issueTracker.png)
