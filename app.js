@@ -8,9 +8,12 @@ var expressStaticGzip = require("express-static-gzip");
 var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/api')
+var apiRouter = require('./routes/api');
 
 var app = express();
+
+require('dotenv').config()
+
 
 app.use(helmet());
 
@@ -66,6 +69,7 @@ if (process.env.NODE_ENV === "development") {
 // Route handler
 app.use('/api/v1', apiRouter) // api route handler
 app.use('/', indexRouter); // react handler
+// app.use('/users',userRouter); // user handler
 
 
 // catch 404 and forward to error handler
