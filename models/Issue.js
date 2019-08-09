@@ -8,10 +8,7 @@ var issueSchema = new Schema({
     type: String
   },
   category: {
-    type : [String]
-  },
-  createdAt: {
-    type: Date,
+    type : [String],
   },
   isResolved:{
     type: Boolean,

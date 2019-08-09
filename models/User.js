@@ -25,7 +25,8 @@ var userSchema = new Schema({
 	password: {
 		type: String,
 		min: 6,
-    max: 20,
+		max: 20,
+		required: true,
   },
 	isAdmin: {
 		type: Boolean,
