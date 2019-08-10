@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 
-class Login extends Component {
+class Signup extends Component {
   state = {
-    firstName:"",
-    lastName:"",
-    phone:"",
+    firstName: "",
+    lastName: "",
+    phonenumber: "",
     email: "",
-    password: "",
-
+    password: ""
   };
 
   changeHandler = e => {
@@ -19,28 +18,43 @@ class Login extends Component {
 
   loginHandler = e => {
     e.preventDefault();
-    console.log(this.state);
+    const { firstName, lastName, email, phonenumber, password } = this.state;
+    const body = { firstName, lastName, email, phonenumber, password };
+
+    fetch("http://localhost:3000/api/v1/users/register", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        this.props.history.push("/Login");
+      })
+      .catch(error => console.error("Error:", error));
+
+    // console.log(body);
   };
   render() {
     return (
       <>
         <form>
-        <input
+          <input
             name="firstName"
             value={this.state.firstName}
             placeholder="firstName"
             onChange={this.changeHandler}
           />
-           <input
+          <input
             name="lastName"
             value={this.state.lastName}
             placeholder="lastName"
             onChange={this.changeHandler}
           />
           <input
-            name="phone"
-            value={this.state.phone}
-            placeholder="phone"
+            name="phonenumber"
+            value={this.state.phonenumber}
+            placeholder="phone number"
             onChange={this.changeHandler}
           />
           <input
@@ -62,4 +76,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Signup;

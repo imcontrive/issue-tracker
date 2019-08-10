@@ -5,8 +5,10 @@ const initialState = {
 }
 
 function currentUser(state = initialState, action) {
+  console.log("inside reducer",action)
   switch (action.type) {
     case 'USER_LOGIN_SUCCESS':
+      console.log("inside action",action)
       return {
         ...state,
         user: action.data.user,

@@ -8,10 +8,8 @@ import "./scss/index.scss";
 import Wrapper from "./Wrapper";
 
 ReactDOM.render(
-  <Router>
     <Wrapper>
       <App />
-    </Wrapper>
-  </Router>,
+    </Wrapper>,
   document.getElementById("root")
 );
