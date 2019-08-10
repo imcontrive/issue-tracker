@@ -23,10 +23,12 @@ class HomePage extends Component{
 
 
   render(){
+    const issues = this.state.issues.Issues
     return(
-    //  this.state.issues.map((elm,index) => {
-      <h1></h1>
-    //  })
+      // issues && issues.map(elm => {
+      //   return <h1>{elm.title}</h1>
+      // })
+      <h1>a</h1>
     )
   }
 }
