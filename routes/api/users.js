@@ -16,7 +16,7 @@ router.post('/register', (req, res) => {
   User.create(req.body, (err, user) => {
     console.log(req.body, 'register')
     if(err) return res.json(err);
-    jwt.sign({userId: user.id}, "process.env.SECRET", (err, token) => {
+    jwt.sign({userId: user.id}, process.env.SECRET, (err, token) => {
       if(err) return res.json({succees: false});
       return res.status(201).json({success:true, message: "user registered" ,token: token});
     })

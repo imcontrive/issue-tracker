@@ -6,7 +6,7 @@ var auth = require('../../utils/verifyToken');
 router.use(auth.verifyToken);
 
 // List all the issues raised by all users
-router.get('/', (req, res) => {
+router.get('/',auth.verifyToken, (req, res) => {
   // fetch  allissue from database and send it in response
   Issue.find({}, (err, issues) => {
     if(err) res.status(500).json(err);

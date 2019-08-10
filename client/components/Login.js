@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux"
 
 class Login extends Component {
   state = {
@@ -15,7 +16,25 @@ class Login extends Component {
 
   loginHandler = e => {
     e.preventDefault();
-    console.log(this.state);
+    const { email, password } = this.state;
+    const body = { email, password };
+
+    fetch("http://localhost:3000/api/v1/users/login", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data.token,"cp token")
+        localStorage.setItem("token",data.token)
+        this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
+        this.props.history.push("/")
+      })
+      .catch(error => console.error("Error:", error));
+
   };
   render() {
     return (
@@ -40,4 +59,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect()(Login);
