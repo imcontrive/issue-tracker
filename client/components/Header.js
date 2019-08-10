@@ -17,7 +17,7 @@ class Header extends Component {
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-end">
               <div className="navbar-item">
-                {this.props.state.currentUser ? (
+                {this.props.state.currentUser.user ? (
                   <div className="buttons">
                     <NavLink
                       to="/"
