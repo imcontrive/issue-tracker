@@ -7,7 +7,7 @@ class Header extends Component {
   render() {
       console.log(this.props.state.currentUser)
     return (
-      <div>
+      <div style={{color: "red"}}>
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <NavLink className="navbar-item" to="/">

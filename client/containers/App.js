@@ -28,12 +28,12 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Router>
-          <Header />
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/Login" component={Login} />
-          <Route exact path="/Signup" component={Signup} />
-          <Route exact path="/createIssue" component={createIssue} />
+          <Route  path="/Login" component={Login} />
+          <Route  path="/Signup" component={Signup} />
+          <Route  path="/createIssue" component={createIssue} />
         </Router>
       </div>
     );
