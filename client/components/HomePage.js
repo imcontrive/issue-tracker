@@ -5,6 +5,9 @@ import { connect } from "react-redux"
 
 class HomePage extends Component{
 
+  state={
+    issues:[]
+  }
 
   componentDidMount(){
     fetch("http://localhost:3000/api/v1/issues",{
@@ -21,9 +24,9 @@ class HomePage extends Component{
 
   render(){
     return(
-     this.state.issues.map((elm,index) => {
-      
-     })
+    //  this.state.issues.map((elm,index) => {
+      <h1></h1>
+    //  })
     )
   }
 }
