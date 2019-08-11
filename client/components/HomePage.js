@@ -25,7 +25,15 @@ class HomePage extends Component {
       <>
         {issues &&
           issues.map(elm => {
-            return <h1>{elm.title}</h1>;
+            let createdAt = new Date(elm.createdAt)
+            return (
+              <div>
+                <h1>{elm.title}</h1>
+                <p>{elm.description}</p>
+                <p>{createdAt.toDateString()}</p>
+                <hr />
+              </div>
+            );
           })}
       </>
     );
