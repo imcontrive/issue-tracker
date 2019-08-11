@@ -29,7 +29,7 @@ class createIssue extends Component {
       }
     })
       .then(res => res.json())
-      .then(data => console.log(data,"createIssue"))
+      .then(data => this.props.history.push("/"))
       .catch(error => console.error("Error:", error));
 
     // console.log(body);
