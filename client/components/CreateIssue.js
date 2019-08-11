@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux"
 
 
 class createIssue extends Component {
@@ -15,9 +16,11 @@ class createIssue extends Component {
     });
   };
 
-  loginHandler = e => {
+  submitHandler = e => {
     e.preventDefault();
     const { title,description,category} = this.state;
+    console.log(this.props,"create issue")
+    // const user = this.props.state.
     const body = { title,description,category };
 
     fetch("http://localhost:3000/api/v1/issues", {
@@ -58,11 +61,11 @@ class createIssue extends Component {
             onChange={this.changeHandler}
           /> */}
          
-          <button onClick={this.loginHandler}>Raise issue</button>
+          <button onClick={this.submitHandler}>Raise issue</button>
         </form>
       </>
     );
   }
 }
 
-export default createIssue;
+export default connect(state => state)(createIssue);
