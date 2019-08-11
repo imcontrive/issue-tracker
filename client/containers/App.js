@@ -16,6 +16,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log("inside app.js")
     var token = localStorage.getItem("authToken") || "";
     if (token) {
       this.setState({ token: token });
