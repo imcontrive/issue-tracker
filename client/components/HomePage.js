@@ -15,24 +15,39 @@ class HomePage extends Component{
       }
     })
     .then(res => res.json())
-    // .then(data => console.log(data,"issues"))
-    .then(data => this.setState({issues:data}))
+    .then(data =>
+      // console.log(data)
+      this.props.dispatch({type:'ADD_ISSUES',Issues: data})
+     );
   }
 
-
+  
   render(){
-    const issues = this.state.issues.Issues
+    // const { IssuesInfo } = this.props.state.currentUser;
+    // const {Issues} = this.state.issues;
+    // console.log(IssuesInfo,"check point two in Home");
+
     return(
-      // issues && issues.map(elm => {
-      //   return <h1>{elm.title}</h1>
-      // })
-      <h1>a</h1>
+      <>
+      {/* {
+        IssuesInfo ? IssuesInfo.map((issue)=> {
+          <p>{issue.title}</p>
+        }): "Not Found" */}
+        
+          
+      {/* } */}
+      <p>not found</p>
+      
+      </>
     )
   }
 }
 
 const mapPropsToState = (state) => {
-  return {state}
+  console.log(state,"state in home");
+  return {
+    state
+  }
 }
 
 export default connect(mapPropsToState)(HomePage);

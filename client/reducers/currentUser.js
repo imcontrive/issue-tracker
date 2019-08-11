@@ -22,6 +22,11 @@ function currentUser(state = initialState, action) {
         isAuthInProgress: false,
         user: null
       }
+      case 'ADD_ISSUES':
+      // console.log(action.Issues.Issues,"ADD_ISSUES 26");
+      return {
+        ...state, IssuesInfo:action.Issues.Issues
+      }
     
     case 'LOG_OUT':
     case 'NO_TOKEN':
