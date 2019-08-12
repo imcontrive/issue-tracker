@@ -7,6 +7,7 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.state.currentUser,"current user")
     fetch("http://localhost:3000/api/v1/issues", {
       method: "GET",
       headers: {
@@ -24,7 +25,7 @@ class HomePage extends Component {
     return (
       <>
         {issues &&
-          issues.map(elm => {
+          issues.reverse().map(elm => {
             let createdAt = new Date(elm.createdAt)
             return (
               <div>

@@ -19,7 +19,7 @@ class createIssue extends Component {
   submitHandler = e => {
     e.preventDefault();
     const { title,description,category} = this.state;
-    console.log(this.props,"create issue")
+    console.log(this.props.state,"create issue")
     // const user = this.props.state.
     const body = { title,description,category };
 
@@ -68,4 +68,8 @@ class createIssue extends Component {
   }
 }
 
-export default connect(state => state)(createIssue);
+const mapPropsToState = state => {
+  return { state };
+};
+
+export default connect(mapPropsToState)(createIssue);
