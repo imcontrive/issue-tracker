@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 
-class HomePage extends Component{
+class Home extends Component{
 
   state={
     issues:[]
@@ -16,27 +16,23 @@ class HomePage extends Component{
     })
     .then(res => res.json())
     .then(data =>
-      // console.log(data)
-      this.props.dispatch({type:'ADD_ISSUES',Issues: data})
+      this.props.dispatch({type:'ADD_ISSUES',data})
      );
   }
 
   
   render(){
-    // const { IssuesInfo } = this.props.state.currentUser;
+    const { IssuesInfo } = this.props.state;
     // const {Issues} = this.state.issues;
-    // console.log(IssuesInfo,"check point two in Home");
+    console.log(IssuesInfo,"check point two in Home");
 
     return(
       <>
-      {/* {
-        IssuesInfo ? IssuesInfo.map((issue)=> {
-          <p>{issue.title}</p>
-        }): "Not Found" */}
-        
-          
-      {/* } */}
-      <p>not found</p>
+      {
+        IssuesInfo.Issues ? IssuesInfo.Issues.map((issue, index) => 
+          <p><small>{index}</small>{issue.title}</p>
+        ):""
+      }
       
       </>
     )
@@ -50,4 +46,4 @@ const mapPropsToState = (state) => {
   }
 }
 
-export default connect(mapPropsToState)(HomePage);
+export default connect(mapPropsToState)(Home);

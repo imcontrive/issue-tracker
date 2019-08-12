@@ -28,7 +28,6 @@ class Login extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        // console.log(data.token,"cp token")
         localStorage.setItem("token",data.token)
         this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
         this.props.history.push("/")

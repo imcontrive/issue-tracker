@@ -4,7 +4,7 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "../scss/index.scss";
 import { getCurrentUser, noToken } from "../actions";
 
-import HomePage from "../components/HomePage";
+import Home from "../components/Home";
 import Header from "../components/Header";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
@@ -30,7 +30,7 @@ class App extends Component {
       <>
         <Router>
         <Header/>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={Home} />
           <Route  path="/login" component={Login} />
           <Route  path="/signup" component={Signup} />
           <Route  path="/createIssue" component={createIssue} />
