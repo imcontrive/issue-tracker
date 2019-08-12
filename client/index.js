@@ -5,6 +5,7 @@ import App from "./containers/App";
 import store from "./store";
 import { Provider } from "react-redux";
 import "./scss/index.scss";
+import "./../public/stylesheets/style.css";
 import Wrapper from "./Wrapper";
 
 ReactDOM.render(

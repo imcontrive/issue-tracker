@@ -38,7 +38,7 @@ class Header extends Component {
                 ) : (
                   <div className="buttons">
                     <NavLink
-                      to="/signup"
+                      to="/register"
                       className="button"
                       activeClassName="is-primary"
                     >

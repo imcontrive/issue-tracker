@@ -15,15 +15,24 @@ class App extends Component {
     token: ""
   };
 
+
   componentDidMount() {
-    var token = localStorage.getItem("authToken") || "";
-    if (token) {
-      this.setState({ token: token });
-      this.props.dispatch(getCurrentUser());
-    } else {
-      this.props.dispatch(noToken());
-    }
+    const token  = localStorage.token ;
+    this.setState({ token: token });
+    console.log(this.state.token ,"App in client");
+
   }
+  
+
+  // componentDidMount() {
+  //   var token = localStorage.getItem("authToken") || "";
+  //   if (token) {
+  //     this.setState({ token: token });
+  //     this.props.dispatch(getCurrentUser());
+  //   } else {
+  //     this.props.dispatch(noToken());
+  //   }
+  // }
 
   render() {
     return (
@@ -32,7 +41,7 @@ class App extends Component {
         <Header/>
           <Route exact path="/" component={Home} />
           <Route  path="/login" component={Login} />
-          <Route  path="/signup" component={Signup} />
+          <Route  path="/register" component={Signup} />
           <Route  path="/createIssue" component={createIssue} />
         </Router>
       </>
