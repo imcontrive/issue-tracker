@@ -15,6 +15,7 @@ class Login extends Component {
   };
 
   loginHandler = e => {
+    console.log("login");
     e.preventDefault();
     const { email, password } = this.state;
     const body = { email, password };
