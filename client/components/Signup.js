@@ -110,7 +110,8 @@ class Signup extends Component {
               }
 							</div>
 						</form>
-						<p class="text--center rg-link">Already have an account?<Link to="/login" className="link-sn">LOGIN NOW</Link></p>
+						<p class="text--center rg-link">Already have an account?<Link to="/login" className="link-sn">LOGIN NOW</Link>
+</p>
 				</div>
 			</div>
       </>
