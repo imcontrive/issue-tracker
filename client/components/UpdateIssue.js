@@ -61,7 +61,10 @@ class UpdateIssue extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data, "create issue");
-        this.props.history.push("/");
+        this.props.history.push({
+          pathname: '/singleIssue',
+          state: { IssueId: this.props.location.state.IssueId}
+        })
       })
       .catch(error => console.error("Error:", error));
   };

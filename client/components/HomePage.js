@@ -47,7 +47,7 @@ class HomePage extends Component {
                     state: { userId: elm.createdBy[0] }
                   }}
                 >
-                  <h1>username</h1>
+                  <p>username</p>
                 </Link>
                 <hr />
               </div>
