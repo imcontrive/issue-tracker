@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Signup extends Component {
+class UpdateUser extends Component {
   state = {
     firstName: "",
     lastName: "",
@@ -9,6 +9,28 @@ class Signup extends Component {
     password: ""
   };
 
+  componentDidMount() {
+    fetch(
+      `http://localhost:3000/api/v1/users/${this.props.location.state.userId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${localStorage.token}`
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        console.log(data,this.state,"user");
+        this.setState({
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+          email: data.user.email,
+          phonenumber: data.user.phonenumber
+        });
+      });
+  }
+
   changeHandler = e => {
     const { name, value } = e.target;
     this.setState({
@@ -16,21 +38,29 @@ class Signup extends Component {
     });
   };
 
-  signupHandler = e => {
-    // console.log("signup");
+  updateHandler = e => {
+    console.log(this.state);
     e.preventDefault();
     const { firstName, lastName, email, phonenumber, password } = this.state;
     const body = { firstName, lastName, email, phonenumber, password };
 
-    fetch("http://localhost:3000/api/v1/users/register", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json"
+    fetch(
+      `http://localhost:3000/api/v1/users/update/${
+        this.props.location.state.userId
+      }`,
+      {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.token}`
+        }
       }
-    })
-      .then(res => {
-        this.props.history.push("/Login");
+    )
+      .then(res => res.json())
+      .then(data => {
+        this.props.history.push("/");
+        console.log(data);
       })
       .catch(error => console.error("Error:", error));
 
@@ -70,11 +100,11 @@ class Signup extends Component {
             type="password"
             onChange={this.changeHandler}
           />
-          <button onClick={this.signupHandler}>Register</button>
+          <button onClick={this.updateHandler}>Update</button>
         </form>
       </>
     );
   }
 }
 
-export default Signup;
+export default UpdateUser;

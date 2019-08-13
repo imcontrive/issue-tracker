@@ -8,7 +8,7 @@ router.use(auth.verifyToken);
 // List all the issues raised by all users
 router.get('/',auth.verifyToken, (req, res) => {
   // fetch  allissue from database and send it in response
-  Issue.find({}, (err, issues) => {
+  Issue.find({}).sort({createdAt: -1 }).exec((err, issues) => {
     if(err) res.status(500).json(err);
     res.status(200).json({ success: true, Issues: issues})
   })
@@ -18,6 +18,7 @@ router.get('/',auth.verifyToken, (req, res) => {
 router.post('/', (req, res) => {
   // fetch Issues data in req.body
   // save it to database using model
+  console.log(req.body);
   Issue.create(req.body, (err, issue) => {
     if(err) return res.json(err);
     res.status(201).json({issue: issue});

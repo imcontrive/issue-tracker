@@ -32,6 +32,7 @@ class Login extends Component {
         localStorage.setItem("token",data.token)
         this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
         this.props.history.push("/")
+        console.log(data)
       })
       .catch(error => console.error("Error:", error));
 
