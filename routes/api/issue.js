@@ -45,6 +45,8 @@ router.put('/:id', (req, res) => {
   })
 })
 
+// only for admin
+
 // delete Issue
 router.delete('/:id', (req, res) => {
   // delete a Issue

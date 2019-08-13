@@ -17,22 +17,15 @@ class App extends Component {
 
 
   componentDidMount() {
-    const token  = localStorage.token ;
-    this.setState({ token: token });
-    console.log(this.state.token ,"App in client");
-
+    var token = localStorage.getItem("token") || "";
+    if (token) {
+      this.setState({ token: token });
+      this.props.dispatch(getCurrentUser());
+    } else {
+      this.props.dispatch(noToken());
+    }
   }
   
-
-  // componentDidMount() {
-  //   var token = localStorage.getItem("authToken") || "";
-  //   if (token) {
-  //     this.setState({ token: token });
-  //     this.props.dispatch(getCurrentUser());
-  //   } else {
-  //     this.props.dispatch(noToken());
-  //   }
-  // }
 
   render() {
     return (
