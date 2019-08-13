@@ -27,13 +27,26 @@ class Login extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(res => res.json())
+      // .then(res => res.json())
+      .then(res => {
+        return res.status===200? res.json()
+        // then(user => {
+    //       // console.log(user)
+    //       localStorage.setItem("user",JSON.stringify(user));
+    //       this.setState({user})
+    //       this.props.history.push({
+    //         pathname: '/',
+    //         state: { user }
+    //       })
+    //     }
+    //       ):alert("something went wrong")
+    // }
       .then(data => {
         localStorage.setItem("token",data.token)
         this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
         this.props.history.push("/")
         console.log(data)
-      })
+      }):alert("invalid credentials")})
       .catch(error => console.error("Error:", error));
 
   };
