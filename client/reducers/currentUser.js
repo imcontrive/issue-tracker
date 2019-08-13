@@ -4,7 +4,7 @@ const initialState = {
   isAuthInProgress: true
 }
 
-function currentUser(state = initialState, action) {
+export function currentUser(state = initialState, action) {
   console.log("inside reducer",action)
   switch (action.type) {
     case 'USER_LOGIN_SUCCESS':
@@ -22,11 +22,6 @@ function currentUser(state = initialState, action) {
         isAuthInProgress: false,
         user: null
       }
-      case 'ADD_ISSUES':
-      // console.log(action.Issues.Issues,"ADD_ISSUES 26");
-      return {
-        ...state, IssuesInfo:action.Issues.Issues
-      }
     
     case 'LOG_OUT':
     case 'NO_TOKEN':
@@ -41,4 +36,15 @@ function currentUser(state = initialState, action) {
   }
 }
 
-export default currentUser;
+export function IssuesInfo(state = initialState, action) {
+  switch (action.type) {
+      case 'ADD_ISSUES':
+      console.log(action.data.Issues,"ADD_ISSUES 41");
+      return {
+        ...state, Issues:action.data.Issues
+      }
+    default:
+      return state;
+  }
+}
+
