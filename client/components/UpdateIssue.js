@@ -1,13 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class createIssue extends Component {
+class UpdateIssue extends Component {
   state = {
-    created: false,
     title: "",
     description: "",
     category: "electricity"
   };
+
+  componentDidMount() {
+    fetch(
+      `http://localhost:3000/api/v1/issues/${
+        this.props.location.state.IssueId
+      }`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${localStorage.token}`
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+          console.log(data)
+        this.setState({
+          title: data.issue.title,
+          description: data.issue.description,
+          category: data.issue.category
+        });
+      });
+  }
 
   changeHandler = e => {
     const { name, value } = e.target;
@@ -25,14 +47,17 @@ class createIssue extends Component {
     const body = { title, description, category, createdBy };
     console.log(body, "user");
 
-    let res = fetch("http://localhost:3000/api/v1/issues", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `token ${localStorage.token}`
+    let res = fetch(
+      `http://localhost:3000/api/v1/issues/${this.props.location.state.IssueId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `token ${localStorage.token}`
+        }
       }
-    })
+    )
       .then(res => res.json())
       .then(data => {
         console.log(data, "create issue");
@@ -77,4 +102,4 @@ const mapPropsToState = state => {
   return { currentUser: state.currentUser };
 };
 
-export default connect(mapPropsToState)(createIssue);
+export default connect(mapPropsToState)(UpdateIssue);

@@ -30,13 +30,23 @@ class HomePage extends Component {
             let createdAt = new Date(elm.createdAt);
             return (
               <div>
-                <Link to={{ pathname: "/singleIssue", state:{id: elm._id }}}>
+                <Link
+                  to={{
+                    pathname: "/singleIssue",
+                    state: { IssueId: elm._id, userId: elm.createdBy[0] }
+                  }}
+                >
                   <h1>{elm.title}</h1>
                 </Link>
                 <p>{elm.description}</p>
                 <p>{createdAt.toDateString()}</p>
                 <p>{elm.category}</p>
-                <Link to={{ pathname: "/user", state:{ userId:elm.createdBy[0] }}}>
+                <Link
+                  to={{
+                    pathname: "/user",
+                    state: { userId: elm.createdBy[0] }
+                  }}
+                >
                   <h1>username</h1>
                 </Link>
                 <hr />

@@ -9,8 +9,9 @@ import Signup from "../components/Signup";
 import createIssue from "../components/CreateIssue";
 import HomePage from "../components/HomePage";
 import SingleIssue from "../components/SingleIssue";
-import User from "../components/User"
-import UpdateUser from"../components/UpdateUser"
+import User from "../components/User";
+import UpdateUser from "../components/UpdateUser";
+import UpdateIssue from "../components/UpdateIssue";
 
 class App extends Component {
   state = {
@@ -42,7 +43,8 @@ class App extends Component {
           <Route path="/createIssue" component={createIssue} />
           <Route path="/singleIssue" component={SingleIssue} />
           <Route path="/user" component={User} />
-          <Route path ="/UpdateUser" component={UpdateUser} />
+          <Route path="/UpdateUser" component={UpdateUser} />
+          <Route path="/UpdateIssue" component={UpdateIssue} />
         </Router>
       </>
     );
