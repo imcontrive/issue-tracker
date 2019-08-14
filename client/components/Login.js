@@ -19,6 +19,7 @@ class Login extends Component {
     e.preventDefault();
     const { email, password } = this.state;
     const body = { email, password };
+    console.log(body);
 
     fetch("http://localhost:3000/api/v1/users/login", {
       method: "POST",
@@ -29,7 +30,7 @@ class Login extends Component {
     })
       // .then(res => res.json())
       .then(res => {
-        return res.status===200? res.json()
+        return res.status===200 ? res.json()
         // then(user => {
     //       // console.log(user)
     //       localStorage.setItem("user",JSON.stringify(user));
@@ -46,7 +47,7 @@ class Login extends Component {
         this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
         this.props.history.push("/")
         console.log(data)
-      }):alert("invalid credentials")})
+      }):console.log(res)})
       .catch(error => console.error("Error:", error));
 
   };

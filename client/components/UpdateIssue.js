@@ -22,7 +22,7 @@ class UpdateIssue extends Component {
     )
       .then(res => res.json())
       .then(data => {
-          console.log(data)
+        console.log(data);
         this.setState({
           title: data.issue.title,
           description: data.issue.description,
@@ -47,8 +47,10 @@ class UpdateIssue extends Component {
     const body = { title, description, category, createdBy };
     console.log(body, "user");
 
-    let res = fetch(
-      `http://localhost:3000/api/v1/issues/${this.props.location.state.IssueId}`,
+    fetch(
+      `http://localhost:3000/api/v1/issues/${
+        this.props.location.state.IssueId
+      }`,
       {
         method: "PUT",
         body: JSON.stringify(body),
@@ -60,11 +62,14 @@ class UpdateIssue extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data, "create issue");
+        console.log(data.issue._id, "update issue");
         this.props.history.push({
-          pathname: '/singleIssue',
-          state: { IssueId: this.props.location.state.IssueId}
-        })
+          pathname: "/singleIssue",
+          state: {
+            IssueId: this.props.location.state.IssueId,
+            userId: this.props.location.state.userId
+          }
+        });
       })
       .catch(error => console.error("Error:", error));
   };
@@ -94,7 +99,7 @@ class UpdateIssue extends Component {
             <option>food</option>
             <option>others</option>
           </select>
-          <button onClick={this.submitHandler}>Raise issue</button>
+          <button onClick={this.submitHandler}>Update issue</button>
         </form>
       </>
     );
