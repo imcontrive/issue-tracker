@@ -21,6 +21,8 @@ var issueSchema = new Schema({
   createdBy: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 }, {timestamps: true});
 
+
+
 var Issue = mongoose.model("Issue", issueSchema);
 
 module.exports = Issue;

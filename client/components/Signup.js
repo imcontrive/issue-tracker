@@ -18,8 +18,8 @@ class Signup extends Component {
     });
   };
 
-  loginHandler = e => {
-    console.log("signup");
+  signupHandler = e => {
+    // console.log("signup");
     e.preventDefault();
     const { firstName, lastName, email, phonenumber, password } = this.state;
     const body = { firstName, lastName, email, phonenumber, password };

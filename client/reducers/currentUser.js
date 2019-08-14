@@ -22,6 +22,11 @@ export function currentUser(state = initialState, action) {
         isAuthInProgress: false,
         user: null
       }
+      case 'USER_RELOAD':
+      return {
+        ...state,
+            user:action.data.user
+      }
     
     case 'LOG_OUT':
     case 'NO_TOKEN':

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class HomePage extends Component {
   state = {
@@ -7,7 +8,7 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.state.currentUser,"current user")
+    console.log(this.props.state.currentUser, "current user");
     fetch("http://localhost:3000/api/v1/issues", {
       method: "GET",
       headers: {
@@ -25,13 +26,19 @@ class HomePage extends Component {
     return (
       <>
         {issues &&
-          issues.reverse().map(elm => {
-            let createdAt = new Date(elm.createdAt)
+          issues.map(elm => {
+            let createdAt = new Date(elm.createdAt);
             return (
               <div>
-                <h1>{elm.title}</h1>
+                <Link to={{ pathname: "/singleIssue", state:{id: elm._id }}}>
+                  <h1>{elm.title}</h1>
+                </Link>
                 <p>{elm.description}</p>
                 <p>{createdAt.toDateString()}</p>
+                <p>{elm.category}</p>
+                <Link to={{ pathname: "/user", state:{ userId:elm.createdBy[0] }}}>
+                  <h1>username</h1>
+                </Link>
                 <hr />
               </div>
             );

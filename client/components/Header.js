@@ -11,7 +11,7 @@ class Header extends Component {
   }
 
   render() {
-      console.log(this.props.state.currentUser)
+      // console.log(this.props.state.currentUser)
     return (
       <div>
         <nav className="navbar" role="navigation" aria-label="main navigation">
