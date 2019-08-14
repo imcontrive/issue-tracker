@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Signup extends Component {
   state = {
@@ -8,7 +8,7 @@ class Signup extends Component {
     phonenumber: "",
     email: "",
     password: "",
-    cnfmPassword:"",
+    cnfmPassword: ""
   };
 
   changeHandler = e => {
@@ -39,82 +39,155 @@ class Signup extends Component {
     // console.log(body);
   };
   render() {
-    const {firstName,lastName,phonenumber,email,password,cnfmPassword} = this.state;
+    const {
+      firstName,
+      lastName,
+      phonenumber,
+      email,
+      password,
+      cnfmPassword
+    } = this.state;
     return (
       <>
-        <div class="isLoginWrapper">
-					<div class="grid">
+        <div className="isLoginWrapper">
+          <div className="grid">
             <h2 className="signup-title">Register</h2>
-						<form class="form login">
-							<div class="form__field">
-								<label for="email">
-									<svg class="icon">
-										<span class="hidden">FirstName</span>
-									</svg>
-								</label>
-								<input id="login__username" type="text" class="form__input" name="firstName"
-                value={this.state.firstName}
-                placeholder="firstName"
-                onChange={this.changeHandler}  required />
-							</div>
-              <div class="form__field">
-								<label for="email">
-									<svg class="icon">
-										<span class="hidden">LastName</span>
-									</svg>
-								</label>
-								<input id="login__username" type="text" class="form__input" name="lastName" value={this.state.lastName}
-            placeholder="lastName"
-            onChange={this.changeHandler}  required />
-							</div>
-              <div class="form__field">
-								<label for="email">
-									<svg class="icon">
-										<span class="hidden">phoneNumber</span>
-									</svg>
-								</label>
-								<input id="login__username" type="text" class="form__input" name="phonenumber"
-            value={this.state.phonenumber}
-            placeholder="phone number"
-            onChange={this.changeHandler}  required />
-							</div>
-              <div class="form__field">
-								<label for="email">
-									<svg class="icon">
-										<span class="hidden">phoneNumber</span>
-									</svg>
-								</label>
-								<input id="login__username" type="text" class="form__input" placeholder="Email" onChange={this.changeHandler} name='email' type="email" value={this.state.email}  required />
-							</div>
+            <form className="form login">
+              <div className="form__field">
+                <label for="email">
+                  <svg className="icon">
+                    <span className="hidden">FirstName</span>
+                  </svg>
+                </label>
+                <input
+                  id="login__username"
+                  type="text"
+                  className="form__input"
+                  name="firstName"
+                  value={this.state.firstName}
+                  placeholder="firstName"
+                  onChange={this.changeHandler}
+                  required
+                />
+              </div>
+              <div className="form__field">
+                <label for="email">
+                  <svg className="icon">
+                    <span className="hidden">LastName</span>
+                  </svg>
+                </label>
+                <input
+                  id="login__username"
+                  type="text"
+                  className="form__input"
+                  name="lastName"
+                  value={this.state.lastName}
+                  placeholder="lastName"
+                  onChange={this.changeHandler}
+                  required
+                />
+              </div>
+              <div className="form__field">
+                <label for="email">
+                  <svg className="icon">
+                    <span className="hidden">phoneNumber</span>
+                  </svg>
+                </label>
+                <input
+                  id="login__username"
+                  type="text"
+                  className="form__input"
+                  name="phonenumber"
+                  value={this.state.phonenumber}
+                  placeholder="phone number"
+                  onChange={this.changeHandler}
+                  required
+                />
+              </div>
+              <div className="form__field">
+                <label for="email">
+                  <svg className="icon">
+                    <span className="hidden">phoneNumber</span>
+                  </svg>
+                </label>
+                <input
+                  id="login__username"
+                  type="text"
+                  className="form__input"
+                  placeholder="Email"
+                  onChange={this.changeHandler}
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  required
+                />
+              </div>
 
-							<div class="form__field">
-								<label for="password">
-									<svg class="icon">
-										<span class="hidden">Password</span>
-									</svg>
-								</label>
-								<input id="login__password" type="password" name="password" class="form__input" placeholder="Password" name='password' onChange={this.changeHandler} type="password" value={ this.state.password } required />
-							</div>
-              <div class="form__field">
-								<label for="password">
-									<svg class="icon">
-										<span class="hidden">Password</span>
-									</svg>
-								</label>
-								<input id="login__password" type="password" name="cnfmPassword" class="form__input" placeholder=" Confirm Password"  onChange={this.changeHandler} type="password" value={ this.state.cnfmPassword } required />
-							</div>
+              <div className="form__field">
+                <label for="password">
+                  <svg className="icon">
+                    <span className="hidden">Password</span>
+                  </svg>
+                </label>
+                <input
+                  id="login__password"
+                  type="password"
+                  name="password"
+                  className="form__input"
+                  placeholder="Password"
+                  name="password"
+                  onChange={this.changeHandler}
+                  type="password"
+                  value={this.state.password}
+                  required
+                />
+              </div>
+              <div className="form__field">
+                <label for="password">
+                  <svg className="icon">
+                    <span className="hidden">Password</span>
+                  </svg>
+                </label>
+                <input
+                  id="login__password"
+                  type="password"
+                  name="cnfmPassword"
+                  className="form__input"
+                  placeholder=" Confirm Password"
+                  onChange={this.changeHandler}
+                  type="password"
+                  value={this.state.cnfmPassword}
+                  required
+                />
+              </div>
 
-							<div class="form__field">
-              {
-                firstName && lastName && phonenumber && email && password && cnfmPassword ?
-                  <input type="submit" value="REGISTER" onClick={this.loginHandler}/> : <p style={{color:"red",paddingLeft:"50px"}}>Please Fill all the field</p>
-              }
-							</div>
-						</form>
-						<p class="text--center rg-link">Already have an account?<Link to="/login" className="link-sn">LOGIN NOW</Link>
-</p>
-				</div>
-			</div>
+              <div className="form__field">
+                {firstName &&
+                lastName &&
+                phonenumber &&
+                email &&
+                password &&
+                cnfmPassword ? (
+                  <input
+                    type="submit"
+                    value="REGISTER"
+                    onClick={this.signupHandler}
+                  />
+                ) : (
+                  <p style={{ color: "red", paddingLeft: "50px" }}>
+                    Please Fill all the field
+                  </p>
+                )}
+              </div>
+            </form>
+            <p className="text--center rg-link">
+              Already have an account?
+              <Link to="/login" className="link-sn">
+                LOGIN NOW
+              </Link>
+            </p>
+          </div>
+        </div>
       </>
     );
   }

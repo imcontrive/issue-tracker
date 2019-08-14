@@ -41,32 +41,32 @@ class Login extends Component {
   render() {
     return (
       <>
-        <div class="isLoginWrapper">
-					<div class="grid">
-						<form class="form login">
-							<div class="form__field">
-								<label for="email">
-									<svg class="icon">
-										<span class="hidden">Email</span>
+        <div className="isLoginWrapper">
+					<div className="grid">
+						<form className="form login">
+							<div className="form__field">
+								<label htmlFor="email">
+									<svg className="icon">
+										<span className="hidden">Email</span>
 									</svg>
 								</label>
-								<input id="login__username" type="text" class="form__input" placeholder="Email" onChange={this.changeHandler} name='email' type="email"  value={this.state.email}  required />
+								<input id="login__username" type="text" className="form__input" placeholder="Email" onChange={this.changeHandler} name='email' type="email"  value={this.state.email}  required />
 							</div>
 
-							<div class="form__field">
-								<label for="password">
-									<svg class="icon">
-										<span class="hidden">Password</span>
+							<div className="form__field">
+								<label htmlFor="password">
+									<svg className="icon">
+										<span className="hidden">Password</span>
 									</svg>
 								</label>
-								<input id="login__password" type="password" name="password" class="form__input" placeholder="Password" name='password' onChange={this.changeHandler} type="password" value={ this.state.password } required />
+								<input id="login__password" type="password" name="password" className="form__input" placeholder="Password" name='password' onChange={this.changeHandler} type="password" value={ this.state.password } required />
 							</div>
 
-							<div class="form__field">
+							<div className="form__field">
 								<input type="submit" value="Sign In" onClick={this.loginHandler}/>
 							</div>
 						</form>
-						<p class="text--center rg-link">Don't have an account?<Link to="/register" className="link-sn">Sign up now</Link></p>
+						<p className="text--center rg-link">Don't have an account?<Link to="/register" className="link-sn">Sign up now</Link></p>
 				</div>
 			</div>
       </>

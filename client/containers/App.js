@@ -41,7 +41,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/register" component={Signup} />
           <Route path="/createIssue" component={createIssue} />
           <Route path="/singleIssue" component={SingleIssue} />
           <Route path="/user" component={User} />
