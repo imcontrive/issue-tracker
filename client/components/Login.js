@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import {Link } from 'react-router-dom';
+import { connect } from "react-redux"
 
 class Login extends Component {
   state = {
@@ -28,47 +27,47 @@ class Login extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(res => res.json())
+      // .then(res => res.json())
+      .then(res => {
+        return res.status===200? res.json()
+        // then(user => {
+    //       // console.log(user)
+    //       localStorage.setItem("user",JSON.stringify(user));
+    //       this.setState({user})
+    //       this.props.history.push({
+    //         pathname: '/',
+    //         state: { user }
+    //       })
+    //     }
+    //       ):alert("something went wrong")
+    // }
       .then(data => {
         localStorage.setItem("token",data.token)
         this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
         this.props.history.push("/")
         console.log(data)
-      })
+      }):alert("invalid credentials")})
       .catch(error => console.error("Error:", error));
 
   };
   render() {
     return (
       <>
-        <div className="isLoginWrapper">
-					<div className="grid">
-						<form className="form login">
-							<div className="form__field">
-								<label htmlFor="email">
-									<svg className="icon">
-										<span className="hidden">Email</span>
-									</svg>
-								</label>
-								<input id="login__username" type="text" className="form__input" placeholder="Email" onChange={this.changeHandler} name='email' type="email"  value={this.state.email}  required />
-							</div>
-
-							<div className="form__field">
-								<label htmlFor="password">
-									<svg className="icon">
-										<span className="hidden">Password</span>
-									</svg>
-								</label>
-								<input id="login__password" type="password" name="password" className="form__input" placeholder="Password" name='password' onChange={this.changeHandler} type="password" value={ this.state.password } required />
-							</div>
-
-							<div className="form__field">
-								<input type="submit" value="Sign In" onClick={this.loginHandler}/>
-							</div>
-						</form>
-						<p className="text--center rg-link">Don't have an account?<Link to="/register" className="link-sn">Sign up now</Link></p>
-				</div>
-			</div>
+        <form>
+          <input
+            name="email"
+            value={this.state.email}
+            placeholder="email"
+            onChange={this.changeHandler}
+          />
+          <input
+            name="password"
+            value={this.state.password}
+            type="password"
+            onChange={this.changeHandler}
+          />
+          <button onClick={this.loginHandler}>login</button>
+        </form>
       </>
     );
   }
