@@ -175,6 +175,7 @@ html {
 
 body {
   /* background-color: var(--bodyBackgroundColor); */
+  background-color: var(--bodyBackgroundColor);
   color: var(--bodyColor);
   font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
   font-size: var(--bodyFontSize);

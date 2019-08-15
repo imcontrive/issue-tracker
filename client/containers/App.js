@@ -11,7 +11,7 @@ import HomePage from "../components/HomePage";
 import SingleIssue from "../components/SingleIssue";
 import User from "../components/User"
 import UpdateUser from"../components/UpdateUser"
-import UpdateIssue from "../components/UpdateIssue";
+// import UpdateIssue from "../components/UpdateIssue";
 
 class App extends Component {
   state = {
@@ -41,12 +41,12 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/register" component={Signup} />
           <Route path="/createIssue" component={createIssue} />
           <Route path="/singleIssue" component={SingleIssue} />
           <Route path="/user" component={User} />
           <Route path ="/UpdateUser" component={UpdateUser} />
-          <Route path="/UpdateIssue" component={UpdateIssue} />
+          {/* <Route path="/UpdateIssue" component={UpdateIssue} /> */}
         </Router>
       </>
     );
