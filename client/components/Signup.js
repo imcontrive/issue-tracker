@@ -21,7 +21,6 @@ class Signup extends Component {
     e.preventDefault();
     const { firstName, lastName, email, phonenumber, password } = this.state;
     const body = { firstName, lastName, email, phonenumber, password };
-
     fetch("http://localhost:3000/api/v1/users/register", {
       method: "POST",
       body: JSON.stringify(body),
@@ -30,6 +29,7 @@ class Signup extends Component {
       }
     })
       .then(res => {
+        console.log(res,"cp")
         this.props.history.push("/Login");
       })
       .catch(error => console.error("Error:", error));

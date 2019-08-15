@@ -36,15 +36,15 @@ class HomePage extends Component {
     const issues = this.state.issues.Issues;
     return (
       <div className="container">
-        <div class="columns hero-body">
+        <div className="columns hero-body">
           <div className="column">
             <div className="box">
               <h2>Filter</h2>
               <ul>
                 <li>
                   Urgency
-                  <div class="field">
-                    <div class="control">
+                  <div className="field">
+                    <div className="control">
                       <div className="select">
                         <select
                           name="category"
@@ -63,8 +63,8 @@ class HomePage extends Component {
                 </li>
                 <li>
                   Categories
-                  <div class="field">
-                    <div class="control">
+                  <div className="field">
+                    <div className="control">
                       <div className="select">
                         <select
                           name="category"
@@ -87,8 +87,8 @@ class HomePage extends Component {
                 </li>
                 <li>
                   Resolved
-                  <div class="field">
-                    <div class="control">
+                  <div className="field">
+                    <div className="control">
                       <div className="select">
                         <select
                           name="isResolved"

@@ -47,7 +47,7 @@ class createIssue extends Component {
           <div className="hero-body">
           <div className="column is-half is-offset-one-quarter box">
             <div className="field">
-              <div class="control">
+              <div className="control">
                 <input class="input" name="title"
             value={this.state.title}
             placeholder="title"
@@ -56,7 +56,7 @@ class createIssue extends Component {
             </div>
             <div className="field">
               {" "}
-              <div class="control">
+              <div className="control">
                 <textarea class="textarea" name="description"
             value={this.state.description}
             placeholder="description"
@@ -64,9 +64,9 @@ class createIssue extends Component {
               </div>
             </div>
 
-            <div class="field is-grouped is-grouped-right">
-              <div class="control">
-                <div class="select">
+            <div className="field is-grouped is-grouped-right">
+              <div className="control">
+                <div className="select">
                 <select
                   name="category"
                   value={this.state.category}
