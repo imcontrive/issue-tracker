@@ -56,12 +56,13 @@ class Login extends Component {
   };
   render() {
     return (
-      <div>
-        <section className="hero is-link is-fullheight-with-navbar">
+      <form>
+        <section className="hero is-primary is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
-              <div className="column is-half is-offset-one-quarter">
-                <p className="title">Login</p>
+            <p className="title">Login</p>
+              <div className="column is-half is-offset-one-quarter box">
+                
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
                     <input
@@ -95,17 +96,19 @@ class Login extends Component {
                     </span>
                   </p>
                 </div>
+                <div class="field is-grouped is-grouped-right">
                 <button
                   className="button is-primary"
                   onClick={this.loginHandler}
                 >
                   Log in
                 </button>
+                </div>
               </div>
             </div>
           </div>
         </section>
-      </div>
+      </form>
     );
   }
 }

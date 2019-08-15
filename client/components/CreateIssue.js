@@ -43,7 +43,54 @@ class createIssue extends Component {
   render() {
     return (
       <>
-        <form>
+        <div className="container">
+          <div className="hero-body">
+          <div className="column is-half is-offset-one-quarter box">
+            <div className="field">
+              <div class="control">
+                <input class="input" name="title"
+            value={this.state.title}
+            placeholder="title"
+            onChange={this.changeHandler} />
+              </div>
+            </div>
+            <div className="field">
+              {" "}
+              <div class="control">
+                <textarea class="textarea" name="description"
+            value={this.state.description}
+            placeholder="description"
+            onChange={this.changeHandler} />
+              </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-right">
+              <div class="control">
+                <div class="select">
+                <select
+                  name="category"
+                  value={this.state.category}
+                  onChange={this.changeHandler}
+                >
+                  <option>water</option>
+                  <option>electricity</option>
+                  <option>food</option>
+                  <option>others</option>
+                </select>
+                </div>
+              </div>
+
+              <button
+                className="button is-primary"
+                onClick={this.submitHandler}
+              >
+                Raise issue
+              </button>
+            </div>
+          </div>
+          </div>
+        </div>
+        {/* <form>
           <input
             name="title"
             value={this.state.title}
@@ -67,7 +114,7 @@ class createIssue extends Component {
             <option>others</option>
           </select>
           <button onClick={this.submitHandler}>Raise issue</button>
-        </form>
+        </form> */}
       </>
     );
   }

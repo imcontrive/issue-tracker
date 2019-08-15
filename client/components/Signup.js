@@ -39,39 +39,108 @@ class Signup extends Component {
   render() {
     return (
       <>
-        <form>
-          <input
-            name="firstName"
-            value={this.state.firstName}
-            placeholder="firstName"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="lastName"
-            value={this.state.lastName}
-            placeholder="lastName"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="phonenumber"
-            value={this.state.phonenumber}
-            placeholder="phone number"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="email"
-            value={this.state.email}
-            placeholder="enter your email"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="password"
-            value={this.state.password}
-            type="password"
-            onChange={this.changeHandler}
-          />
-          <button onClick={this.signupHandler}>Register</button>
-        </form>
+        <section className="hero is-primary is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="container">
+            <p className="title">Sign Up</p>
+              <div className="column is-half is-offset-one-quarter box">
+                
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      name="firstName"
+                      value={this.state.firstName}
+                      placeholder="firstName"
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i class="fas fa-user" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      name="lastName"
+                      value={this.state.lastName}
+                      placeholder="lastName"
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i class="fas fa-user" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      name="phonenumber"
+                      value={this.state.phonenumber}
+                      placeholder="phone number"
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i class="fas fa-mobile" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      name="email"
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p class="control has-icons-left">
+                    <input
+                      class="input"
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.changeHandler}
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock" />
+                    </span>
+                  </p>
+                </div>
+                <div class="field is-grouped is-grouped-right">
+                <button
+                  className="button is-primary"
+                  onClick={this.signupHandler}
+                >
+                  Sign Up
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </>
     );
   }

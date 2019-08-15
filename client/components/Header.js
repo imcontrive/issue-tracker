@@ -12,55 +12,77 @@ class Header extends Component {
   render() {
     // console.log(this.props.state.currentUser)
     return (
-      <div className="container">
-        <nav className="navbar" role="navigation" aria-label="main navigation">
-          <div className="navbar-brand">
-            <NavLink className="navbar-item" to="/">
-              <h4>ALTConcerns</h4>
-            </NavLink>
-          </div>
-          <div id="navbarBasicExample" className="navbar-menu">
-            <div className="navbar-end">
-              <div className="navbar-item">
-                {localStorage.token ? (
-                  <div className="buttons">
-                    <NavLink
-                      to="/"
-                      exact
-                      className="button"
-                      activeClassName="is-primary"
-                    >
-                      Home
-                    </NavLink>
-                    <NavLink
-                      to="/createIssue"
-                      className="button"
-                      activeClassName="is-primary"
-                    >
-                      Raise An Issue
-                    </NavLink>
-                    <button className="button" onClick={this.logoutHandler}>
-                      logout
-                    </button>
-                  </div>
-                ) : (
-                  <div className="buttons">
-                    <NavLink
-                      to="/signup"
-                      className="button"
-                      activeClassName="is-primary"
-                    >
-                      Sign Up
-                    </NavLink>
-                    <NavLink
-                      to="/login"
-                      className="button"
-                      activeClassName="is-primary"
-                    >
-                      Log In
-                    </NavLink>
-                  </div>
-                )}
+      <div>
+        <nav
+          className="navbar has-shadow"
+          role="navigation"
+          aria-label="main navigation"
+        >
+          <div className="container">
+            <div className="navbar-brand">
+              <NavLink className="navbar-item" to="/">
+                <h4>ALTConcerns</h4>
+              </NavLink>
+            </div>
+            <div id="navbarBasicExample" className="navbar-menu">
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  {localStorage.token ? (
+                    <div className="buttons">
+                      <NavLink
+                        to="/"
+                        exact
+                        className="button"
+                        activeClassName="is-primary"
+                      >
+                        {" "}
+                        <span className="icon">
+                          <i class="fas fa-home" />
+                        </span>
+                        <span>Home</span>
+                      </NavLink>
+                      <NavLink
+                        to="/createIssue"
+                        className="button"
+                        activeClassName="is-primary"
+                      >
+                        <span className="icon">
+                          <i class="fas fa-plus" />{" "}
+                        </span>{" "}
+                        <span>Raise An Issue</span>
+                      </NavLink>
+                      <button className="button" onClick={this.logoutHandler}>
+                        <span className="icon">
+                          <i class="fas fa-sign-out-alt" />{" "}
+                        </span>{" "}
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="buttons">
+                      <NavLink
+                        to="/signup"
+                        className="button"
+                        activeClassName="is-primary"
+                      >
+                        <span className="icon">
+                          <i class="fas fa-user-plus" />{" "}
+                        </span>{" "}
+                        <span>Sign Up</span>
+                      </NavLink>
+                      <NavLink
+                        to="/login"
+                        className="button"
+                        activeClassName="is-primary"
+                      >
+                        <span className="icon">
+                          <i class="fas fa-sign-in-alt" />{" "}
+                        </span>{" "}
+                        <span>Log in</span>
+                      </NavLink>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
