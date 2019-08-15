@@ -1,17 +1,16 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 class Header extends Component {
-
   logoutHandler = () => {
-    localStorage.setItem("token","")
-    this.props.history.push("/Login")
-  }
+    localStorage.setItem("token", "");
+    this.props.history.push("/Login");
+  };
 
   render() {
-      // console.log(this.props.state.currentUser)
+    // console.log(this.props.state.currentUser)
     return (
       <div>
         <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -40,9 +39,7 @@ class Header extends Component {
                     >
                       Raise An Issue
                     </NavLink>
-                    <button onClick={this.logoutHandler}>
-                      logout
-                    </button>
+                    <button onClick={this.logoutHandler}>logout</button>
                   </div>
                 ) : (
                   <div className="buttons">
@@ -71,8 +68,8 @@ class Header extends Component {
   }
 }
 
-const mapPropsToState = (state) => {
-    return {state}
-  }
+const mapPropsToState = state => {
+  return { state };
+};
 
-export default withRouter(connect(mapPropsToState)(Header))
+export default withRouter(connect(mapPropsToState)(Header));
