@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux"
+import { connect } from "react-redux";
 
 class Login extends Component {
   state = {
@@ -30,46 +30,82 @@ class Login extends Component {
     })
       // .then(res => res.json())
       .then(res => {
-        return res.status===200 ? res.json()
-        // then(user => {
-    //       // console.log(user)
-    //       localStorage.setItem("user",JSON.stringify(user));
-    //       this.setState({user})
-    //       this.props.history.push({
-    //         pathname: '/',
-    //         state: { user }
-    //       })
-    //     }
-    //       ):alert("something went wrong")
-    // }
-      .then(data => {
-        localStorage.setItem("token",data.token)
-        this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
-        this.props.history.push("/")
-        console.log(data)
-      }):console.log(res)})
+        return res.status === 200
+          ? res
+              .json()
+              // then(user => {
+              //       // console.log(user)
+              //       localStorage.setItem("user",JSON.stringify(user));
+              //       this.setState({user})
+              //       this.props.history.push({
+              //         pathname: '/',
+              //         state: { user }
+              //       })
+              //     }
+              //       ):alert("something went wrong")
+              // }
+              .then(data => {
+                localStorage.setItem("token", data.token);
+                this.props.dispatch({ type: "USER_LOGIN_SUCCESS", data });
+                this.props.history.push("/");
+                console.log(data);
+              })
+          : console.log(res);
+      })
       .catch(error => console.error("Error:", error));
-
   };
   render() {
     return (
-      <>
-        <form>
-          <input
-            name="email"
-            value={this.state.email}
-            placeholder="email"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="password"
-            value={this.state.password}
-            type="password"
-            onChange={this.changeHandler}
-          />
-          <button onClick={this.loginHandler}>login</button>
-        </form>
-      </>
+      <div>
+        <section className="hero is-link is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="container">
+              <div className="column is-half is-offset-one-quarter">
+                <p className="title">Login</p>
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      name="email"
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p class="control has-icons-left">
+                    <input
+                      class="input"
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.changeHandler}
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock" />
+                    </span>
+                  </p>
+                </div>
+                <button
+                  className="button is-primary"
+                  onClick={this.loginHandler}
+                >
+                  Log in
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     );
   }
 }

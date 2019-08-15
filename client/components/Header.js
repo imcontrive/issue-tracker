@@ -12,7 +12,7 @@ class Header extends Component {
   render() {
     // console.log(this.props.state.currentUser)
     return (
-      <div>
+      <div className="container">
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <NavLink className="navbar-item" to="/">
@@ -30,7 +30,7 @@ class Header extends Component {
                       className="button"
                       activeClassName="is-primary"
                     >
-                      <strong>Home</strong>
+                      Home
                     </NavLink>
                     <NavLink
                       to="/createIssue"
@@ -39,7 +39,9 @@ class Header extends Component {
                     >
                       Raise An Issue
                     </NavLink>
-                    <button onClick={this.logoutHandler}>logout</button>
+                    <button className="button" onClick={this.logoutHandler}>
+                      logout
+                    </button>
                   </div>
                 ) : (
                   <div className="buttons">
@@ -48,7 +50,7 @@ class Header extends Component {
                       className="button"
                       activeClassName="is-primary"
                     >
-                      <strong>Sign Up</strong>
+                      Sign Up
                     </NavLink>
                     <NavLink
                       to="/login"
