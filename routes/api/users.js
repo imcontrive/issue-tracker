@@ -23,6 +23,8 @@ router.post('/register', (req, res) => {
   })
 })
 
+// routes for finding currentLogin Users
+
 router.get('/me',auth.verifyToken, (req,res) => {
   console.log(req.user, "/me....")
   User.findById(req.user._id, (err, user) => {

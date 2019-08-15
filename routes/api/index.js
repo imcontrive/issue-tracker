@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 var userRouter = require('./users');
 var issueRouter = require('./issue');
+var inviteRouter = require('./inviteusers');
 
 
 
 router.use('/users', userRouter);
 router.use('/issues', issueRouter);
+router.use('/invites', inviteRouter);
 
 
 
