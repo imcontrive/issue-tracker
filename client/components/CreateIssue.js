@@ -18,12 +18,12 @@ class createIssue extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    console.log(this.props.currentUser);
+    // console.log(this.props.currentUser.user.firstname);
     let createdBy = [this.props.currentUser.user._id];
     const { title, description, category } = this.state;
 
     const body = { title, description, category, createdBy };
-    console.log(body, "user");
+    // console.log(body, "user");
 
     let res = fetch("http://localhost:3000/api/v1/issues", {
       method: "POST",
@@ -35,7 +35,7 @@ class createIssue extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data, "create issue");
+        // console.log(data, "create issue");
         this.props.history.push("/");
       })
       .catch(error => console.error("Error:", error));
@@ -45,49 +45,55 @@ class createIssue extends Component {
       <>
         <div className="container">
           <div className="hero-body">
-          <div className="column is-half is-offset-one-quarter has-background-light">
-            <div className="field">
-              <div className="control">
-                <input className="input" name="title"
-            value={this.state.title}
-            placeholder="title"
-            onChange={this.changeHandler} />
+            <div className="column is-half is-offset-one-quarter has-background-light">
+              <div className="field">
+                <div className="control">
+                  <input
+                    className="input"
+                    name="title"
+                    value={this.state.title}
+                    placeholder="title"
+                    onChange={this.changeHandler}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="field">
-              {" "}
-              <div className="control">
-                <textarea class="textarea" name="description"
-            value={this.state.description}
-            placeholder="description"
-            onChange={this.changeHandler} />
-              </div>
-            </div>
-
-            <div className="field is-grouped is-grouped-right">
-              <div className="control">
-                <div className="select">
-                <select
-                  name="category"
-                  value={this.state.category}
-                  onChange={this.changeHandler}
-                >
-                  <option>water</option>
-                  <option>electricity</option>
-                  <option>food</option>
-                  <option>others</option>
-                </select>
+              <div className="field">
+                {" "}
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    name="description"
+                    value={this.state.description}
+                    placeholder="description"
+                    onChange={this.changeHandler}
+                  />
                 </div>
               </div>
 
-              <button
-                className="button is-primary"
-                onClick={this.submitHandler}
-              >
-                Raise issue
-              </button>
+              <div className="field is-grouped is-grouped-right">
+                <div className="control">
+                  <div className="select">
+                    <select
+                      name="category"
+                      value={this.state.category}
+                      onChange={this.changeHandler}
+                    >
+                      <option>water</option>
+                      <option>electricity</option>
+                      <option>food</option>
+                      <option>others</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  className="button is-primary"
+                  onClick={this.submitHandler}
+                >
+                  Raise issue
+                </button>
+              </div>
             </div>
-          </div>
           </div>
         </div>
         {/* <form>

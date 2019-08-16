@@ -21,7 +21,7 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data, "inside app");
+        // console.log(data, "inside app");
         this.props.dispatch({ type: "USER_RELOAD", data });
       });
   }

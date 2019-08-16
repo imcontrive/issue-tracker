@@ -10,7 +10,7 @@ class Header extends Component {
   };
 
   render() {
-    console.log(this.props.state.currentUser.user);
+    // console.log(this.props.state.currentUser.user);
     return (
       <div>
         <nav
@@ -20,7 +20,8 @@ class Header extends Component {
         >
           <div className="container is-black">
             <div className="navbar-brand">
-              { this.props.state.currentUser.user && this.props.state.currentUser.user._id ? (
+              {this.props.state.currentUser.user &&
+              this.props.state.currentUser.user._id ? (
                 <NavLink className="navbar-item" to="/">
                   ALTConcerns
                 </NavLink>

@@ -33,8 +33,9 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log(this.props.user.user,"cp1")
+    // console.log(this.props.user.user,"cp1")
     const issues = this.state.issues.Issues;
+    // console.log(issues)
     return (
       <div className="container">
         <div className="columns hero-body">
@@ -125,11 +126,11 @@ class HomePage extends Component {
                     ? true
                     : Boolean(this.state.isResolved) === elm.isResolved
                 )
-                .map(elm => {
+                .map((elm,index) => {
                   let createdAt = new Date(elm.createdAt);
                   // console.log(elm);
                   return (
-                    <div className="card has-margin-bottom-25">
+                    <div key={index} className="card has-margin-bottom-25">
                       <div className="has-background-light">
                         <header className="card-header-title justify-space-between ">
                           <Link

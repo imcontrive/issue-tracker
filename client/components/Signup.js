@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 class Signup extends Component {
   state = {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     phonenumber: "",
     email: "",
     password: ""
@@ -20,8 +20,8 @@ class Signup extends Component {
   signupHandler = e => {
     // console.log("signup");
     e.preventDefault();
-    const { firstName, lastName, email, phonenumber, password } = this.state;
-    const body = { firstName, lastName, email, phonenumber, password };
+    const { firstname, lastname, email, phonenumber, password } = this.state;
+    const body = { firstname, lastname, email, phonenumber, password };
     fetch("http://localhost:3000/api/v1/users/register", {
       method: "POST",
       body: JSON.stringify(body),
@@ -49,7 +49,7 @@ class Signup extends Component {
                   <p className="control has-icons-left has-icons-right">
                     <input
                       className="input"
-                      name="firstName"
+                      name="firstname"
                       value={this.state.firstName}
                       placeholder="firstName"
                       onChange={this.changeHandler}
@@ -66,7 +66,7 @@ class Signup extends Component {
                   <p className="control has-icons-left has-icons-right">
                     <input
                       className="input"
-                      name="lastName"
+                      name="lastname"
                       value={this.state.lastName}
                       placeholder="lastName"
                       onChange={this.changeHandler}
