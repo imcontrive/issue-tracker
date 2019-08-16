@@ -10,19 +10,23 @@ class Header extends Component {
   };
 
   render() {
-    // console.log(this.props.state.currentUser)
+    console.log(this.props.state.currentUser.user);
     return (
       <div>
         <nav
-          className="navbar has-shadow"
+          className="navbar has-shadow has-background-grey-lighter"
           role="navigation"
           aria-label="main navigation"
         >
-          <div className="container">
+          <div className="container is-black">
             <div className="navbar-brand">
-              <NavLink className="navbar-item" to="/">
-                <h4>ALTConcerns</h4>
-              </NavLink>
+              { this.props.state.currentUser.user && this.props.state.currentUser.user._id ? (
+                <NavLink className="navbar-item" to="/">
+                  ALTConcerns
+                </NavLink>
+              ) : (
+                <p className="navbar-item">ALTConcerns</p>
+              )}
             </div>
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-end">

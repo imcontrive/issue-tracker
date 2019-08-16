@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -50,19 +51,18 @@ class Login extends Component {
                 this.props.history.push("/");
                 console.log(data);
               })
-          : console.log(res);
+          : alert("invalid username or password");
       })
       .catch(error => console.error("Error:", error));
   };
   render() {
     return (
       <form>
-        <section className="hero is-primary is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
-            <p className="title">Login</p>
-              <div className="column is-half is-offset-one-quarter box">
-                
+              <p className="title">Login</p>
+              <div className="column is-half is-offset-one-quarter box has-background-light">
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
                     <input
@@ -97,13 +97,14 @@ class Login extends Component {
                   </p>
                 </div>
                 <div className="field is-grouped is-grouped-right">
-                <button
-                  className="button is-primary"
-                  onClick={this.loginHandler}
-                >
-                  Log in
-                </button>
+                  <button
+                    className="button is-primary"
+                    onClick={this.loginHandler}
+                  >
+                    Log in
+                  </button>
                 </div>
+                <Link to="/signup">Don't have an account? Sign Up</Link>
               </div>
             </div>
           </div>

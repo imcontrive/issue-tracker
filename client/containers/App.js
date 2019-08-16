@@ -1,17 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "../scss/index.scss";
 
 import Header from "../components/Header";
-import Login from "../components/Login";
-import Signup from "../components/Signup";
-import createIssue from "../components/CreateIssue";
-import HomePage from "../components/HomePage";
-import SingleIssue from "../components/SingleIssue";
-import User from "../components/User";
-import UpdateUser from "../components/UpdateUser";
-import UpdateIssue from "../components/UpdateIssue";
+import Public from "../components/public";
+import Protected from "../components/Protected";
 
 class App extends Component {
   state = {
@@ -35,17 +29,12 @@ class App extends Component {
   render() {
     return (
       <>
-        <Router>
           <Header />
-          <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/createIssue" component={createIssue} />
-          <Route path="/singleIssue" component={SingleIssue} />
-          <Route path="/user" component={User} />
-          <Route path="/UpdateUser" component={UpdateUser} />
-          <Route path="/UpdateIssue" component={UpdateIssue} />
-        </Router>
+        {this.props.currentUser && this.props.currentUser._id ? (
+          <Protected />
+        ) : (
+          <Public />
+        )}
       </>
     );
   }

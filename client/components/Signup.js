@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Signup extends Component {
   state = {
@@ -29,7 +30,7 @@ class Signup extends Component {
       }
     })
       .then(res => {
-        console.log(res,"cp")
+        console.log(res, "cp");
         this.props.history.push("/Login");
       })
       .catch(error => console.error("Error:", error));
@@ -39,12 +40,11 @@ class Signup extends Component {
   render() {
     return (
       <>
-        <section className="hero is-primary is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
-            <p className="title">Sign Up</p>
-              <div className="column is-half is-offset-one-quarter box">
-                
+              <p className="title">Sign Up</p>
+              <div className="column is-half is-offset-one-quarter box has-background-light">
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
                     <input
@@ -130,13 +130,14 @@ class Signup extends Component {
                   </p>
                 </div>
                 <div className="field is-grouped is-grouped-right">
-                <button
-                  className="button is-primary"
-                  onClick={this.signupHandler}
-                >
-                  Sign Up
-                </button>
+                  <button
+                    className="button is-primary"
+                    onClick={this.signupHandler}
+                  >
+                    Sign Up
+                  </button>
                 </div>
+                <Link to="/login">Already have an account? LogIn</Link>
               </div>
             </div>
           </div>

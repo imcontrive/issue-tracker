@@ -33,34 +33,39 @@ class HomePage extends Component {
   }
 
   render() {
+    console.log(this.props.user.user,"cp1")
     const issues = this.state.issues.Issues;
     return (
       <div className="container">
         <div className="columns hero-body">
           <div className="column">
-            <div className="box">
-              <h2>Filter</h2>
+            <div className="box has-background-light">
+              <h2 className=" title has-text-centered">Filter</h2>
               <ul>
-                <li>
-                  Urgency
-                  <div className="field">
-                    <div className="control">
-                      <div className="select">
-                        <select
-                          name="category"
-                          onChange={e => {
-                            this.handleFilter(e.target.name, e.target.value);
-                          }}
-                        >
-                          <option value="all">All</option>
-                          <option value="veryUrgent">Very Urgent</option>
-                          <option value="urgent">Urgent</option>
-                          <option value="notUrgent">Not Urgent</option>
-                        </select>
+                {this.props.user.user && this.props.user.user.isAdmin?
+                  <li>
+                    Urgency
+                    <div className="field">
+                      <div className="control">
+                        <div className="select">
+                          <select
+                            name="category"
+                            onChange={e => {
+                              this.handleFilter(e.target.name, e.target.value);
+                            }}
+                          >
+                            <option value="all">All</option>
+                            <option value="veryUrgent">Very Urgent</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="notUrgent">Not Urgent</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                  :
+                  null
+                }
                 <li>
                   Categories
                   <div className="field">
@@ -122,27 +127,62 @@ class HomePage extends Component {
                 )
                 .map(elm => {
                   let createdAt = new Date(elm.createdAt);
+                  // console.log(elm);
                   return (
-                    <div className="box has-shadow">
-                      <Link
-                        to={{
-                          pathname: "/singleIssue",
-                          state: { IssueId: elm._id, userId: elm.createdBy[0] }
-                        }}
-                      >
-                        <h1>{elm.title}</h1>
-                      </Link>
-                      <p>{elm.description}</p>
-                      <p>{createdAt.toDateString()}</p>
-                      <p>{elm.category}</p>
-                      <Link
-                        to={{
-                          pathname: "/user",
-                          state: { userId: elm.createdBy[0] }
-                        }}
-                      >
-                        <p>{elm.createdBy[0]}</p>
-                      </Link>
+                    <div className="card has-margin-bottom-25">
+                      <div className="has-background-light">
+                        <header className="card-header-title justify-space-between ">
+                          <Link
+                            to={{
+                              pathname: "/singleIssue",
+                              state: {
+                                IssueId: elm._id,
+                                userId: elm.createdBy[0]
+                              }
+                            }}
+                          >
+                            <p className="content">{elm.title}</p>
+                          </Link>
+
+                          <div>
+                            <span>{elm.category}</span>
+                          </div>
+                        </header>
+
+                        <div className="card-content">
+                          <div className="content">{elm.description}</div>
+                        </div>
+
+                        <footer className="card-footer">
+                          <p className="card-footer-item">
+                            <span>
+                              {elm.isResolved ? (
+                                <span className="has-text-success">
+                                  Resolved
+                                </span>
+                              ) : (
+                                <span className="has-text-danger">
+                                  Unresolved
+                                </span>
+                              )}
+                            </span>
+                          </p>
+
+                          <p className="card-footer-item">
+                            <Link
+                              to={{
+                                pathname: "/user",
+                                state: { userId: elm.createdBy[0] }
+                              }}
+                            >
+                              <span>{elm.createdBy[0]}</span>
+                            </Link>
+                          </p>
+                          <p className="card-footer-item">
+                            <span>{createdAt.toDateString()}</span>
+                          </p>
+                        </footer>
+                      </div>
                     </div>
                   );
                 })}
@@ -154,7 +194,7 @@ class HomePage extends Component {
 }
 
 const mapPropsToState = state => {
-  return { state };
+  return { user: state.currentUser };
 };
 
 export default connect(mapPropsToState)(HomePage);
