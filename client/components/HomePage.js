@@ -41,7 +41,7 @@ class HomePage extends Component {
         <div className="columns hero-body">
           <div className="column">
             <div className="box has-background-light">
-              <h2 className=" title has-text-centered">Filter</h2>
+              <h2 className=" title is-4 has-text-centered">Filter</h2>
               <ul>
                 {this.props.user.user && this.props.user.user.isAdmin?
                   <li>
@@ -142,7 +142,7 @@ class HomePage extends Component {
                               }
                             }}
                           >
-                            <p className="content">{elm.title}</p>
+                            <p className="content title is-4">{elm.title}</p>
                           </Link>
 
                           <div>

@@ -77,7 +77,7 @@ class SingleIssue extends Component {
           <div className="media-content">
             <div className="content">
               <p>
-                <strong>{issue.title}</strong>{" "}
+                <strong className="title is-4">{issue.title}</strong>{" "}
                 <small>{new Date(issue.createdAt).toDateString()}</small>
               </p>
             </div>
