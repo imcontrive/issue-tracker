@@ -14,14 +14,14 @@ class Header extends Component {
     return (
       <div>
         <nav
-          className="navbar has-shadow"
+          className="navbar has-shadow has-background-grey-lighter"
           role="navigation"
           aria-label="main navigation"
         >
-          <div className="container">
+          <div className="container is-black">
             <div className="navbar-brand">
               <NavLink className="navbar-item" to="/">
-                <h4>ALTConcerns</h4>
+                ALTConcerns
               </NavLink>
             </div>
             <div id="navbarBasicExample" className="navbar-menu">

@@ -45,7 +45,7 @@ class createIssue extends Component {
       <>
         <div className="container">
           <div className="hero-body">
-          <div className="column is-half is-offset-one-quarter box">
+          <div className="column is-half is-offset-one-quarter has-background-light">
             <div className="field">
               <div class="control">
                 <input class="input" name="title"

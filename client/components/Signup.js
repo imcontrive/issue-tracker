@@ -39,11 +39,11 @@ class Signup extends Component {
   render() {
     return (
       <>
-        <section className="hero is-primary is-fullheight-with-navbar">
+        <section className="hero is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
             <p className="title">Sign Up</p>
-              <div className="column is-half is-offset-one-quarter box">
+              <div className="column is-half is-offset-one-quarter box has-background-light">
                 
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
