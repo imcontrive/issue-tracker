@@ -37,7 +37,7 @@ class Header extends Component {
                       >
                         {" "}
                         <span className="icon">
-                          <i class="fas fa-home" />
+                          <i className="fas fa-home" />
                         </span>
                         <span>Home</span>
                       </NavLink>
@@ -47,13 +47,13 @@ class Header extends Component {
                         activeClassName="is-primary"
                       >
                         <span className="icon">
-                          <i class="fas fa-plus" />{" "}
+                          <i className="fas fa-plus" />{" "}
                         </span>{" "}
                         <span>Raise An Issue</span>
                       </NavLink>
                       <button className="button" onClick={this.logoutHandler}>
                         <span className="icon">
-                          <i class="fas fa-sign-out-alt" />{" "}
+                          <i className="fas fa-sign-out-alt" />{" "}
                         </span>{" "}
                         <span>Logout</span>
                       </button>
@@ -66,9 +66,9 @@ class Header extends Component {
                         activeClassName="is-primary"
                       >
                         <span className="icon">
-                          <i class="fas fa-user-plus" />{" "}
+                          <i className="fas fa-user-plus" />{" "}
                         </span>{" "}
-                        <span>Sign Up</span>
+                        <div>Sign Up</div>
                       </NavLink>
                       <NavLink
                         to="/login"
@@ -76,7 +76,7 @@ class Header extends Component {
                         activeClassName="is-primary"
                       >
                         <span className="icon">
-                          <i class="fas fa-sign-in-alt" />{" "}
+                          <i className="fas fa-sign-in-alt" />{" "}
                         </span>{" "}
                         <span>Log in</span>
                       </NavLink>

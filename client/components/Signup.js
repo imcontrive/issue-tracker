@@ -42,9 +42,8 @@ class Signup extends Component {
         <section className="hero is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
-            <p className="title">Sign Up</p>
+              <p className="title">Sign Up</p>
               <div className="column is-half is-offset-one-quarter box has-background-light">
-                
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
                     <input
@@ -55,7 +54,7 @@ class Signup extends Component {
                       onChange={this.changeHandler}
                     />
                     <span className="icon is-small is-left">
-                      <i class="fas fa-user" />
+                      <i className="fas fa-user" />
                     </span>
                     <span className="icon is-small is-right">
                       <i className="fas fa-check" />
@@ -72,7 +71,7 @@ class Signup extends Component {
                       onChange={this.changeHandler}
                     />
                     <span className="icon is-small is-left">
-                      <i class="fas fa-user" />
+                      <i className="fas fa-user" />
                     </span>
                     <span className="icon is-small is-right">
                       <i className="fas fa-check" />
@@ -89,7 +88,7 @@ class Signup extends Component {
                       onChange={this.changeHandler}
                     />
                     <span className="icon is-small is-left">
-                      <i class="fas fa-mobile" />
+                      <i className="fas fa-mobile" />
                     </span>
                     <span className="icon is-small is-right">
                       <i className="fas fa-check" />
@@ -117,25 +116,25 @@ class Signup extends Component {
                 <div className="field">
                   <p class="control has-icons-left">
                     <input
-                      class="input"
+                      className="input"
                       type="password"
                       placeholder="Password"
                       name="password"
                       value={this.state.password}
                       onChange={this.changeHandler}
                     />
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-lock" />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-lock" />
                     </span>
                   </p>
                 </div>
-                <div class="field is-grouped is-grouped-right">
-                <button
-                  className="button is-primary"
-                  onClick={this.signupHandler}
-                >
-                  Sign Up
-                </button>
+                <div className="field is-grouped is-grouped-right">
+                  <button
+                    className="button is-primary"
+                    onClick={this.signupHandler}
+                  >
+                    Sign Up
+                  </button>
                 </div>
               </div>
             </div>

@@ -72,37 +72,55 @@ class SingleIssue extends Component {
 
     const issue = this.state.issue;
     return (
-      <div>
-        <p>category:{issue.category}</p>
-        <h1>{issue.title}</h1>
-        <p>{issue.description}</p>
-        <p>{new Date(issue.createdAt).toDateString()}</p>
-        {/* bug here, refresh this component to see */}
-        <Link
-          to={{
-            pathname: "/user",
-            state: { userId: issue.createdBy && issue.createdBy[0] }
-          }}
-        >
-          <p>username</p>
-        </Link>
-        {this.props.location.state.userId === this.props.user._id ? (
-          <Link
-            to={{
-              pathname: "/updateIssue",
-              state: {
-                IssueId: this.props.location.state.IssueId,
-                userId: this.props.location.state.userId
-              }
-            }}
-          >
-            <button>Update</button>
-          </Link>
-        ) : null}
-        {this.props.user.isAdmin ? (
-          <button onClick={this.handleResolve}>Resolve</button>
-        ) : null}
-        <p>Resolved:{issue.isResolved ? "true" : "false"}</p>
+      <div className="container">
+        <div className="column is-half is-offset-one-quarter box has-background-light has-margin-top-25">
+          <div className="media-content">
+            <div className="content">
+              <p>
+                <strong>{issue.title}</strong>{" "}
+                <small>{new Date(issue.createdAt).toDateString()}</small>
+              </p>
+            </div>
+            <p className="content">{issue.description}</p>
+            <nav className="level is-mobile">
+              <Link
+                to={{
+                  pathname: "/user",
+                  state: { userId: issue.createdBy && issue.createdBy[0] }
+                }}
+              >
+                <p>username</p>
+              </Link>
+              <p>{issue.category}</p>
+
+              {/* bug here, refresh this component to see */}
+
+              {this.props.user.isAdmin ? (
+                <button className="button" onClick={this.handleResolve}>
+                  Resolve
+                </button>
+              ) : null}
+              {issue.isResolved ? (
+                <span className="has-text-success">Soveled</span>
+              ) : (
+                <span className="has-text-danger">unsolved</span>
+              )}
+              {this.props.location.state.userId === this.props.user._id ? (
+                <Link
+                  to={{
+                    pathname: "/updateIssue",
+                    state: {
+                      IssueId: this.props.location.state.IssueId,
+                      userId: this.props.location.state.userId
+                    }
+                  }}
+                >
+                  <button className="button is-primary">Update</button>
+                </Link>
+              ) : null}
+            </nav>
+          </div>
+        </div>
       </div>
     );
   }

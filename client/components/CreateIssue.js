@@ -45,76 +45,57 @@ class createIssue extends Component {
       <>
         <div className="container">
           <div className="hero-body">
-          <div className="column is-half is-offset-one-quarter has-background-light">
-            <div className="field">
-              <div class="control">
-                <input class="input" name="title"
-            value={this.state.title}
-            placeholder="title"
-            onChange={this.changeHandler} />
+            <div className="column is-half is-offset-one-quarter has-background-light">
+              <div className="field">
+                <div className="control">
+                  <input
+                    className="input"
+                    name="title"
+                    value={this.state.title}
+                    placeholder="title"
+                    onChange={this.changeHandler}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="field">
-              {" "}
-              <div class="control">
-                <textarea class="textarea" name="description"
-            value={this.state.description}
-            placeholder="description"
-            onChange={this.changeHandler} />
-              </div>
-            </div>
-
-            <div class="field is-grouped is-grouped-right">
-              <div class="control">
-                <div class="select">
-                <select
-                  name="category"
-                  value={this.state.category}
-                  onChange={this.changeHandler}
-                >
-                  <option>water</option>
-                  <option>electricity</option>
-                  <option>food</option>
-                  <option>others</option>
-                </select>
+              <div className="field">
+                {" "}
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    name="description"
+                    value={this.state.description}
+                    placeholder="description"
+                    onChange={this.changeHandler}
+                  />
                 </div>
               </div>
 
-              <button
-                className="button is-primary"
-                onClick={this.submitHandler}
-              >
-                Raise issue
-              </button>
+              <div className="field is-grouped is-grouped-right">
+                <div className="control">
+                  <div className="select">
+                    <select
+                      name="category"
+                      value={this.state.category}
+                      onChange={this.changeHandler}
+                    >
+                      <option>water</option>
+                      <option>electricity</option>
+                      <option>food</option>
+                      <option>others</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  className="button is-primary"
+                  onClick={this.submitHandler}
+                >
+                  Raise issue
+                </button>
+              </div>
             </div>
           </div>
-          </div>
         </div>
-        {/* <form>
-          <input
-            name="title"
-            value={this.state.title}
-            placeholder="title"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="description"
-            value={this.state.description}
-            placeholder="description"
-            onChange={this.changeHandler}
-          />
-          <select
-            name="category"
-            value={this.state.category}
-            onChange={this.changeHandler}
-          >
-            <option>water</option>
-            <option>electricity</option>
-            <option>food</option>
-            <option>others</option>
-          </select>
-          <button onClick={this.submitHandler}>Raise issue</button>
-        </form> */}
       </>
     );
   }
