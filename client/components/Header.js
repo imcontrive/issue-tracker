@@ -73,7 +73,7 @@ class Header extends Component {
                         <span className="icon">
                           <i className="fas fa-user-plus" />{" "}
                         </span>{" "}
-                        <span>Sign Up</span>
+                        <div>Sign Up</div>
                       </NavLink>
                       <NavLink
                         to="/login"

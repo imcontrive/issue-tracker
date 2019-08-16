@@ -75,33 +75,55 @@ class UpdateIssue extends Component {
   };
   render() {
     return (
-      <>
-        <form>
-          <input
-            name="title"
-            value={this.state.title}
-            placeholder="title"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="description"
-            value={this.state.description}
-            placeholder="description"
-            onChange={this.changeHandler}
-          />
-          <select
-            name="category"
-            value={this.state.category}
-            onChange={this.changeHandler}
-          >
-            <option>water</option>
-            <option>electricity</option>
-            <option>food</option>
-            <option>others</option>
-          </select>
-          <button onClick={this.submitHandler}>Update issue</button>
-        </form>
-      </>
+      <div className="container">
+        <div className="column is-half is-offset-one-quarter box has-background-light has-margin-top-25">
+          <div className="media-content">
+            <div className="content">
+              <p>
+                <input
+                  className="input"
+                  name="title"
+                  value={this.state.title}
+                  placeholder="title"
+                  onChange={this.changeHandler}
+                />
+              </p>
+            </div>
+            <textarea
+              name="description"
+              className="textarea"
+              value={this.state.description}
+              placeholder="description"
+              onChange={this.changeHandler}
+            />
+            <nav className="level is-mobile">
+              <div className="field">
+                <div className="control">
+                  <div className="select">
+                    <select
+                      name="category"
+                      value={this.state.category}
+                      onChange={this.changeHandler}
+                    >
+                      <option>water</option>
+                      <option>electricity</option>
+                      <option>food</option>
+                      <option>others</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                className="button is-primary"
+                onClick={this.submitHandler}
+              >
+                Update issue
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
     );
   }
 }

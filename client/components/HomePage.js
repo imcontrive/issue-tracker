@@ -146,7 +146,15 @@ class HomePage extends Component {
                           </Link>
 
                           <div>
-                            <span>{elm.category}</span>
+                          <Link
+                              to={{
+                                pathname: "/user",
+                                state: { userId: elm.createdBy[0] }
+                              }}
+                            >
+                              <span>{elm.createdBy[0]}</span>
+                            </Link>
+                            
                           </div>
                         </header>
 
@@ -170,17 +178,11 @@ class HomePage extends Component {
                           </p>
 
                           <p className="card-footer-item">
-                            <Link
-                              to={{
-                                pathname: "/user",
-                                state: { userId: elm.createdBy[0] }
-                              }}
-                            >
-                              <span>{elm.createdBy[0]}</span>
-                            </Link>
+                          {createdAt.toDateString()}
                           </p>
                           <p className="card-footer-item">
-                            <span>{createdAt.toDateString()}</span>
+                           
+                            <span>{elm.category}</span>
                           </p>
                         </footer>
                       </div>
