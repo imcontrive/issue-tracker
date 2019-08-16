@@ -36,15 +36,15 @@ class HomePage extends Component {
     const issues = this.state.issues.Issues;
     return (
       <div className="container">
-        <div class="columns hero-body">
+        <div className="columns hero-body">
           <div className="column">
-            <div className="box">
-              <h2>Filter</h2>
+            <div className="box has-background-light">
+              <h2 className=" title has-text-centered">Filter</h2>
               <ul>
                 <li>
                   Urgency
-                  <div class="field">
-                    <div class="control">
+                  <div className="field">
+                    <div className="control">
                       <div className="select">
                         <select
                           name="category"
@@ -63,8 +63,8 @@ class HomePage extends Component {
                 </li>
                 <li>
                   Categories
-                  <div class="field">
-                    <div class="control">
+                  <div className="field">
+                    <div className="control">
                       <div className="select">
                         <select
                           name="category"
@@ -87,8 +87,8 @@ class HomePage extends Component {
                 </li>
                 <li>
                   Resolved
-                  <div class="field">
-                    <div class="control">
+                  <div className="field">
+                    <div className="control">
                       <div className="select">
                         <select
                           name="isResolved"
@@ -122,28 +122,55 @@ class HomePage extends Component {
                 )
                 .map(elm => {
                   let createdAt = new Date(elm.createdAt);
+                  console.log(elm);
                   return (
-                    <div className="box has-shadow">
-                      <Link
-                        to={{
-                          pathname: "/singleIssue",
-                          state: { IssueId: elm._id, userId: elm.createdBy[0] }
-                        }}
-                      >
-                        <h1>{elm.title}</h1>
-                      </Link>
-                      <p>{elm.description}</p>
-                      <p>{createdAt.toDateString()}</p>
-                      <p>{elm.category}</p>
-                      <Link
-                        to={{
-                          pathname: "/user",
-                          state: { userId: elm.createdBy[0] }
-                        }}
-                      >
-                        <p>{elm.createdBy[0]}</p>
-                      </Link>
+                    
+                    <div className="card has-margin-bottom-25">
+                      <div className="has-background-light">
+                        <header className="card-header-title justify-space-between ">
+                          <Link
+                            to={{
+                              pathname: "/singleIssue",
+                              state: {
+                                IssueId: elm._id,
+                                userId: elm.createdBy[0]
+                              }
+                            }}
+                          >
+                            <p className="content">{elm.title}</p>
+                          </Link>
+                          
+                          <div>
+                            <span>{elm.category}</span>
+                          </div>
+                        </header>
+
+                        <div className="card-content">
+                          <div className="content">{elm.description}</div>
+                        </div>
+
+                        <footer className="card-footer">
+                        <p className="card-footer-item">
+                            <span>{elm.isResolved[0] ? (<span className="has-text-success">Soveled</span>):(<span className="has-text-danger">unsolved</span>)}</span>
+                          </p>
+                          
+                          <p className="card-footer-item">
+                            <Link
+                              to={{
+                                pathname: "/user",
+                                state: { userId: elm.createdBy[0] }
+                              }}
+                            >
+                              <span>{elm.createdBy[0]}</span>
+                            </Link>
+                          </p>
+                          <p className="card-footer-item">
+                            <span>{createdAt.toDateString()}</span>
+                          </p>
+                        </footer>
+                      </div>
                     </div>
+              
                   );
                 })}
           </div>
