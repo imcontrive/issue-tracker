@@ -37,7 +37,7 @@ class User extends Component {
               state: { userId: this.props.location.state.userId }
             }}
           >
-            <button>Update</button>
+            <button class="button">Update</button>
           </Link>
         ) : null}
       </>
