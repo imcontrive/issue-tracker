@@ -124,7 +124,6 @@ class HomePage extends Component {
                   let createdAt = new Date(elm.createdAt);
                   console.log(elm);
                   return (
-                    
                     <div className="card has-margin-bottom-25">
                       <div className="has-background-light">
                         <header className="card-header-title justify-space-between ">
@@ -139,7 +138,7 @@ class HomePage extends Component {
                           >
                             <p className="content">{elm.title}</p>
                           </Link>
-                          
+
                           <div>
                             <span>{elm.category}</span>
                           </div>
@@ -150,10 +149,20 @@ class HomePage extends Component {
                         </div>
 
                         <footer className="card-footer">
-                        <p className="card-footer-item">
-                            <span>{elm.isResolved[0] ? (<span className="has-text-success">Soveled</span>):(<span className="has-text-danger">unsolved</span>)}</span>
+                          <p className="card-footer-item">
+                            <span>
+                              {elm.isResolved[0] ? (
+                                <span className="has-text-success">
+                                  Soveled
+                                </span>
+                              ) : (
+                                <span className="has-text-danger">
+                                  unsolved
+                                </span>
+                              )}
+                            </span>
                           </p>
-                          
+
                           <p className="card-footer-item">
                             <Link
                               to={{
@@ -170,7 +179,6 @@ class HomePage extends Component {
                         </footer>
                       </div>
                     </div>
-              
                   );
                 })}
           </div>
