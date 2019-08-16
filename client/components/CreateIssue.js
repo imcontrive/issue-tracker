@@ -48,7 +48,7 @@ class createIssue extends Component {
           <div className="column is-half is-offset-one-quarter box">
             <div className="field">
               <div className="control">
-                <input class="input" name="title"
+                <input className="input" name="title"
             value={this.state.title}
             placeholder="title"
             onChange={this.changeHandler} />
