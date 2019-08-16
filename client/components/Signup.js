@@ -17,7 +17,7 @@ class Signup extends Component {
   };
 
   signupHandler = e => {
-    // console.log("signup");
+    console.log("signup");
     e.preventDefault();
     const { firstName, lastName, email, phonenumber, password } = this.state;
     const body = { firstName, lastName, email, phonenumber, password };
