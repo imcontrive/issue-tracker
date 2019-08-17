@@ -72,6 +72,7 @@ class Header extends Component {
                       </span>{" "}
                       <span>Raise An Issue</span>
                     </NavLink>
+
                     <button className="button" onClick={this.logoutHandler}>
                       <span className="icon">
                         <i className="fas fa-sign-out-alt" />{" "}
