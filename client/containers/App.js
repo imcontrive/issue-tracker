@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
-import "../scss/index.scss";
+import { Switch } from "react-router-dom";
 
 import Header from "../components/Header";
 import Public from "../components/public";
@@ -29,12 +28,14 @@ class App extends Component {
   render() {
     return (
       <>
-          <Header />
-        {this.props.currentUser && this.props.currentUser._id ? (
-          <Protected />
-        ) : (
-          <Public />
-        )}
+        <Header />
+        <Switch>
+          {this.props.currentUser && this.props.currentUser._id ? (
+            <Protected />
+          ) : (
+            <Public />
+          )}
+        </Switch>
       </>
     );
   }
