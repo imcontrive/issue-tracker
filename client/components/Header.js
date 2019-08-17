@@ -102,7 +102,7 @@ class Header extends Component {
                       </span>{" "}
                       <span>Log in</span>
                     </NavLink>
-                    {
+                    {/* {
                       this.props.user.user && this.props.user.user.isAdmin ? 
                       <NavLink
                       to="/inviteUsers"
@@ -114,7 +114,7 @@ class Header extends Component {
                       </span>{" "}
                       <span>inviteUsers</span>
                     </NavLink>: ""
-                    }
+                    } */}
                   </div>
                 )}
               </div>
