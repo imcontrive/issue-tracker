@@ -23,8 +23,6 @@ class Home extends Component{
   
   render(){
     const { IssuesInfo } = this.props.state;
-    // const {Issues} = this.state.issues;
-    // console.log(IssuesInfo,"check point two in Home");
 
     return(
       <>

@@ -1,14 +1,8 @@
-# Issue Tracker
-A simple issue tracker for altcampus. 
+# Issue Trackr
 
-## Collaborators
+## A simple issue tracker for altcampus. 
 
-### [Shubham Pandey](@imcontrive) Project Manager
-### [Amit kumar Gupta](@amitg01) Front-end lead
-### [Rajesh Mule](@Rajesh Mule)  UI designer
-
-
-
+---
 
   Install dependencies:
 
@@ -22,31 +16,10 @@ $ npm install
 $ npm start
 ```
 
-  View the website at: http://localhost:3000
+  View the website at:     http://localhost:3000
 
-## Folder structure
-- bin
-  - www file is the server start script 
-- *client*
-    - actions
-      - lists actions
-    - components
-      - lists presentational components
-    - containers
-      - lists stateful components
-    - reducers
-      - lists all reducers
-    - scss
-      - for all styles in react
-    - index.js
-      - entry point for react application
-    - store.js
-      - redux store
-    - Wrapper.js
-      - wrapper for all routes in react
+  ---
 
-- public
-    - contains static assets in express
     
 # User Story and Persona
 ## Student 
@@ -65,3 +38,22 @@ $ npm start
 
 # Flow Chart
 ![flow chart](https://github.com/imcontrive/issue-tracker/blob/develop/public/images/issueTracker.png)
+
+
+# Collaborators
+
+----
+## Project Manager
+
+### [Shubham Pandey](https://github.com/imcontrive)
+----
+
+## Front-end developer
+
+### [Amit kumar Gupta](https://github.com/amitg01) 
+
+----
+## Front-end &  UI designer
+
+### [Rajesh Mule](https://github.com/rajeshmule)  
+----

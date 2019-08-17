@@ -26,21 +26,26 @@ class User extends Component {
   }
 
   render() {
-    // console.log(this.props.user._id===this.props.location.state.userId)
     return (
-      <>
-        <h1>{this.state.user.email}</h1>
-        {this.props.user._id === this.props.location.state.userId ? (
-          <Link
-            to={{
-              pathname: "/updateUser",
-              state: { userId: this.props.location.state.userId }
-            }}
-          >
-            <button>Update</button>
-          </Link>
-        ) : null}
-      </>
+      <section className="hero is-primary is-bold">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">{this.state.user.email}</h1>
+            <div className="field is-grouped is-grouped-right">
+              {this.props.user._id === this.props.location.state.userId ? (
+                <Link
+                  to={{
+                    pathname: "/updateUser",
+                    state: { userId: this.props.location.state.userId }
+                  }}
+                >
+                  <button className="button">Edit Profile</button>
+                </Link>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }
