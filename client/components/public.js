@@ -10,7 +10,7 @@ export default class Public extends Component {
     //   <Switch>
     <>
         <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/register" component={Signup} />
         </>
     //   </Switch>
     );

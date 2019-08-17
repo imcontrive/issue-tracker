@@ -51,7 +51,7 @@ class Login extends Component {
                 this.props.history.push("/");
                 console.log(data);
               })
-          : alert("invalid username or password");
+          : console.log(res,"errror from backend")
       })
       .catch(error => console.error("Error:", error));
   };
@@ -97,12 +97,15 @@ class Login extends Component {
                   </p>
                 </div>
                 <div className="field is-grouped is-grouped-right">
+                  {
+                    this.state.email && this.state.password ?
                   <button
                     className="button is-primary"
                     onClick={this.loginHandler}
                   >
                     Log in
-                  </button>
+                  </button> : <p className="has-text-danger has-text-center">Plz fill all the filled</p>
+                  }
                 </div>
                 <p className="has-text-centered">
                   <Link to="/signup">Don't have an account? Sign Up</Link>
