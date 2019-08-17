@@ -27,13 +27,13 @@ class App extends Component {
     return (
       <>
         <Header />
-        <Switch>
+        
           {this.props.currentUser && this.props.currentUser._id ? (
             <Protected />
           ) : (
             <Public />
           )}
-        </Switch>
+        
       </>
     );
   }
