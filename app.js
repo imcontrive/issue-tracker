@@ -67,6 +67,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Route handler
+
 app.use('/api/v1', apiRouter) // api route handler
 app.use('/', indexRouter); // react handler
 
@@ -78,6 +79,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
