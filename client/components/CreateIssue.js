@@ -6,7 +6,7 @@ class createIssue extends Component {
     created: false,
     title: "",
     description: "",
-    category: "electricity"
+    category: "electricity",
   };
 
   changeHandler = e => {
@@ -21,8 +21,9 @@ class createIssue extends Component {
     // console.log(this.props.currentUser.user.firstname);
     let createdBy = [this.props.currentUser.user._id];
     const { title, description, category } = this.state;
+    let isUrgent = "Not Urgent"
 
-    const body = { title, description, category, createdBy };
+    const body = { title, description, category, createdBy, isUrgent };
     // console.log(body, "user");
 
     let res = fetch("http://localhost:3000/api/v1/issues", {
@@ -35,7 +36,7 @@ class createIssue extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        // console.log(data, "create issue");
+        console.log(data, "create issue");
         this.props.history.push("/");
       })
       .catch(error => console.error("Error:", error));

@@ -6,7 +6,8 @@ class SingleIssue extends Component {
   state = {
     issue: {},
     isResolved: false,
-    IssueId: null
+    IssueId: null,
+    isUrgent: "Very Urgent"
   };
 
   handleResolve = () => {
@@ -41,6 +42,47 @@ class SingleIssue extends Component {
       .catch(error => console.error("Error:", error));
   };
 
+  handleUrgentStateChange = (name, value) => {
+    this.setState({
+      [name]: value,
+      // isUrgent: "notUrgent"
+    });
+  };
+
+  handleUrgent = () => {
+    // let isResolved = true
+    let body = { isUrgent: this.state.isUrgent };
+    // console.log(body,"body");
+    fetch(
+      `http://localhost:3000/api/v1/issues/${
+        this.props.location.state.IssueId
+      }`,
+      {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `token ${localStorage.token}`
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data, "set urgent");
+        // this.props.history.push({
+        //   pathname: "/singleIssue",
+        //   state: { IssueId: data.issue._id }
+        // });
+        this.setState({
+          // isResolved: data.issue.isResolved,
+          // IssueId: data.issue._id,
+          issue: data.issue,
+          // isUrgent: data.issue.isUrgent
+        });
+      })
+      .catch(error => console.error("Error:", error));
+  };
+
   componentDidMount() {
     fetch(
       `http://localhost:3000/api/v1/issues/${this.props.location.state
@@ -57,10 +99,11 @@ class SingleIssue extends Component {
       .then(res => res.json())
 
       .then(data => {
-        console.log(data.issue.isResolved, "single issue fetch render");
+        // console.log(data.issue, "single issue fetch render");
         this.setState({
           issue: data.issue,
-          isResolved: data.issue.isResolved
+          isResolved: data.issue.isResolved,
+          // isUrgent: data.issue.isUrgent
         });
       })
       .catch(error => console.error("Error:", error));
@@ -69,6 +112,7 @@ class SingleIssue extends Component {
   render() {
     // console.log(this.state.issue);
     // console.log( this.props.history.location.state.IssueId);
+    console.log("cp");
 
     const issue = this.state.issue;
     return (
@@ -103,6 +147,27 @@ class SingleIssue extends Component {
           <button onClick={this.handleResolve}>Resolve</button>
         ) : null}
         <p>Resolved:{issue.isResolved ? "true" : "false"}</p>
+        {this.props.user.isAdmin ? (
+          <div className="field">
+            <div className="control">
+              <div className="select">
+                <select
+                  name="isUrgent"
+                  onChange={e => {
+                    this.handleUrgentStateChange(e.target.name, e.target.value);
+                  }}
+                >
+                  <option value="Very Urgent">Very Urgent</option>
+                  <option value="Urgent">Urgent</option>
+                  <option value="Not Urgent">Not Urgent</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        <p>{issue.isUrgent}</p>
+        <button onClick={this.handleUrgent}>set</button>
       </div>
     );
   }

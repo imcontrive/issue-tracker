@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 class UpdateUser extends Component {
   state = {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     phonenumber: "",
     email: "",
     password: ""
@@ -23,8 +23,8 @@ class UpdateUser extends Component {
       .then(data => {
         console.log(data,this.state,"user");
         this.setState({
-          firstName: data.user.firstName,
-          lastName: data.user.lastName,
+          firstname: data.user.firstname,
+          lastname: data.user.lastname,
           email: data.user.email,
           phonenumber: data.user.phonenumber
         });
@@ -41,7 +41,7 @@ class UpdateUser extends Component {
   updateHandler = e => {
     console.log(this.state);
     e.preventDefault();
-    const { firstName, lastName, email, phonenumber, password } = this.state;
+    const { firstname, lastname, email, phonenumber, password } = this.state;
     const body = { firstName, lastName, email, phonenumber, password };
 
     fetch(
@@ -71,14 +71,14 @@ class UpdateUser extends Component {
       <>
         <form>
           <input
-            name="firstName"
-            value={this.state.firstName}
+            name="firstname"
+            value={this.state.firstname}
             placeholder="firstName"
             onChange={this.changeHandler}
           />
           <input
-            name="lastName"
-            value={this.state.lastName}
+            name="lastname"
+            value={this.state.lastname}
             placeholder="lastName"
             onChange={this.changeHandler}
           />

@@ -26,6 +26,7 @@ class User extends Component {
   }
 
   render() {
+    // console.log(this.props.location,"check point..............");
     // console.log(this.props.user._id===this.props.location.state.userId)
     return (
       <>
@@ -33,7 +34,7 @@ class User extends Component {
         {this.props.user._id === this.props.location.state.userId ? (
           <Link
             to={{
-              pathname: "/updateUser",
+              pathname: `/updateUser/${this.props.location.state.userId}`,
               state: { userId: this.props.location.state.userId }
             }}
           >

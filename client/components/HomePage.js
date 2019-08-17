@@ -6,7 +6,8 @@ class HomePage extends Component {
   state = {
     issues: [],
     category: ["all"],
-    isResolved: "all"
+    isResolved: "all",
+    isUrgent:"all"
   };
 
   handleFilter = (name, value) => {
@@ -43,14 +44,14 @@ class HomePage extends Component {
             <div className="box has-background-light">
               <h2 className=" title has-text-centered">Filter</h2>
               <ul>
-                {this.props.user.user && this.props.user.user.isAdmin?
+                {this.props.user.user && this.props.user.user.isAdmin ? (
                   <li>
                     Urgency
                     <div className="field">
                       <div className="control">
                         <div className="select">
                           <select
-                            name="category"
+                            name="isUrgent"
                             onChange={e => {
                               this.handleFilter(e.target.name, e.target.value);
                             }}
@@ -64,9 +65,7 @@ class HomePage extends Component {
                       </div>
                     </div>
                   </li>
-                  :
-                  null
-                }
+                ) : null}
                 <li>
                   Categories
                   <div className="field">
@@ -126,16 +125,26 @@ class HomePage extends Component {
                     ? true
                     : Boolean(this.state.isResolved) === elm.isResolved
                 )
-                .map((elm,index) => {
+                .filter(elm =>
+                  this.state.isUrgent === "all"
+                    ? true
+                    : (this.state.isUrgent) === elm.isUrgent
+                )
+                .map((elm, index) => {
                   let createdAt = new Date(elm.createdAt);
                   // console.log(elm);
                   return (
                     <div key={index} className="card has-margin-bottom-25">
                       <div className="has-background-light">
                         <header className="card-header-title justify-space-between ">
+                          <div>
+                            <span>
+                              {elm.isUrgent != undefined ? elm.isUrgent : null}
+                            </span>
+                          </div>
                           <Link
                             to={{
-                              pathname: "/singleIssue",
+                              pathname: `/singleIssue/${elm._id}`,
                               state: {
                                 IssueId: elm._id,
                                 userId: elm.createdBy[0]
@@ -172,7 +181,7 @@ class HomePage extends Component {
                           <p className="card-footer-item">
                             <Link
                               to={{
-                                pathname: "/user",
+                                pathname: `/user/:${elm.createdBy[0]}`,
                                 state: { userId: elm.createdBy[0] }
                               }}
                             >
