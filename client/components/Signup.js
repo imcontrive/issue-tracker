@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
+import queryString from 'query-string';
+
 
 class Signup extends Component {
   state = {
@@ -10,6 +12,20 @@ class Signup extends Component {
     password: "",
     cnfmPassword:"",
   };
+
+  componentDidMount(){
+    const refCode = queryString.parse(location.search).ref;
+    console.log(refCode, 'ref')
+    fetch(`http://localhost:3000/api/v1/invites/${refCode}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        this.setState({
+          email: data.user.email
+        })
+      }
+    })
+  }
 
   changeHandler = e => {
     const { name, value } = e.target;
@@ -38,6 +54,9 @@ class Signup extends Component {
 
     // console.log(body);
   };
+
+  
+
   render() {
     const {firstName,lastName,phonenumber,email,password,cnfmPassword} = this.state;
     return (
@@ -84,7 +103,7 @@ class Signup extends Component {
 										<span class="hidden">phoneNumber</span>
 									</svg>
 								</label>
-								<input id="login__username" type="text" class="form__input" placeholder="Email" onChange={this.changeHandler} name='email' type="email" value={this.state.email}  required />
+								<input id="login__username" type="text" class="form__input" placeholder="Email" onChange={this.changeHandler} name='email' type="email" value={this.state.email} readOnly={true}  required />
 							</div>
 
 							<div class="form__field">
@@ -107,7 +126,7 @@ class Signup extends Component {
 							<div class="form__field">
               {
                 firstName && lastName && phonenumber && email && password && cnfmPassword ?
-                  <input type="submit" value="REGISTER" onClick={this.loginHandler}/> : <p style={{color:"red",paddingLeft:"50px"}}>Please Fill all the field</p>
+                  <input type="submit" value="REGISTER" onClick={this.signupHandler}/> : <p style={{color:"red",paddingLeft:"50px"}}>Please Fill all the field</p>
               }
 							</div>
 						</form>

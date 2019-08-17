@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 	host = req.get("host");
 	let refCode;
 		refCode = randomN(6);
-		link = `http://${host}/api/v1/users/register?ref=${refCode}`;
+		link = `http://${host}/register?ref=${refCode}`;
     const { email } = req.body;
     
     //creating new Users
@@ -62,6 +62,17 @@ router.post('/', (req, res) => {
       }
 
     })
+
+})
+
+
+router.get('/:refCode', (req, res) => {
+  const { refCode } = req.params;
+  InviteUser.findOne({ refCode: refCode }, (err, user) => {
+    console.log(user, "..........................")
+    if(err) return res.status(400).json({success:false, error:"Invalid refCode"});
+    if(user) return res.status(200).json({success:true,user: user});
+  });
 
 })
 
