@@ -101,6 +101,19 @@ class Header extends Component {
                       </span>{" "}
                       <span>Log in</span>
                     </NavLink>
+                    {/* {
+                      this.props.user.user && this.props.user.user.isAdmin ? 
+                      <NavLink
+                      to="/inviteUsers"
+                      className="button"
+                      activeClassName="is-primary"
+                    >
+                      <span className="icon">
+                        <i className="fas fa-sign-in-alt" />{" "}
+                      </span>{" "}
+                      <span>inviteUsers</span>
+                    </NavLink>: ""
+                    } */}
                   </div>
                 )}
               </div>
