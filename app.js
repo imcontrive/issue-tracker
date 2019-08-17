@@ -67,6 +67,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Route handler
+
 app.use('/api/v1', apiRouter) // api route handler
 app.use('/', indexRouter); // react handler
 
