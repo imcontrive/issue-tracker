@@ -97,31 +97,6 @@ class createIssue extends Component {
             </div>
           </div>
         </div>
-        {/* <form>
-          <input
-            name="title"
-            value={this.state.title}
-            placeholder="title"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="description"
-            value={this.state.description}
-            placeholder="description"
-            onChange={this.changeHandler}
-          />
-          <select
-            name="category"
-            value={this.state.category}
-            onChange={this.changeHandler}
-          >
-            <option>water</option>
-            <option>electricity</option>
-            <option>food</option>
-            <option>others</option>
-          </select>
-          <button onClick={this.submitHandler}>Raise issue</button>
-        </form> */}
       </>
     );
   }

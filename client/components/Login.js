@@ -61,7 +61,7 @@ class Login extends Component {
         <section className="hero is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
-              <p className="title">Login</p>
+              <p className="title has-text-centered">Login</p>
               <div className="column is-half is-offset-one-quarter box has-background-light">
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
@@ -104,7 +104,9 @@ class Login extends Component {
                     Log in
                   </button>
                 </div>
-                <Link to="/signup">Don't have an account? Sign Up</Link>
+                <p className="has-text-centered">
+                  <Link to="/signup">Don't have an account? Sign Up</Link>
+                </p>
               </div>
             </div>
           </div>

@@ -42,7 +42,7 @@ class HomePage extends Component {
         <div className="columns hero-body">
           <div className="column">
             <div className="box has-background-light">
-              <h2 className=" title has-text-centered">Filter</h2>
+              <h2 className=" title is-4 has-text-centered">Filter</h2>
               <ul>
                 {this.props.user.user && this.props.user.user.isAdmin ? (
                   <li>
@@ -137,11 +137,7 @@ class HomePage extends Component {
                     <div key={index} className="card has-margin-bottom-25">
                       <div className="has-background-light">
                         <header className="card-header-title justify-space-between ">
-                          <div>
-                            <span>
-                              {elm.isUrgent != undefined ? elm.isUrgent : null}
-                            </span>
-                          </div>
+                          
                           <Link
                             to={{
                               pathname: `/singleIssue/${elm._id}`,
@@ -151,11 +147,19 @@ class HomePage extends Component {
                               }
                             }}
                           >
-                            <p className="content">{elm.title}</p>
+                            <p className="content title is-4">{elm.title}</p>
                           </Link>
 
                           <div>
-                            <span>{elm.category}</span>
+                          <Link
+                              to={{
+                                pathname: "/user",
+                                state: { userId: elm.createdBy[0] }
+                              }}
+                            >
+                              <span>{elm.createdBy[0]}</span>
+                            </Link>
+                            
                           </div>
                         </header>
 
@@ -179,17 +183,17 @@ class HomePage extends Component {
                           </p>
 
                           <p className="card-footer-item">
-                            <Link
-                              to={{
-                                pathname: `/user/:${elm.createdBy[0]}`,
-                                state: { userId: elm.createdBy[0] }
-                              }}
-                            >
-                              <span>{elm.createdBy[0]}</span>
-                            </Link>
+                           
+                          {createdAt.toDateString()}
                           </p>
                           <p className="card-footer-item">
-                            <span>{createdAt.toDateString()}</span>
+                           
+                            <span>{elm.category}</span>
+                          </p>
+                          <p className="card-footer-item">
+                            <span>
+                              {elm.isUrgent != undefined ? elm.isUrgent : null}
+                            </span>
                           </p>
                         </footer>
                       </div>

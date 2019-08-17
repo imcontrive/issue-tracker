@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import "../scss/index.scss";
-
 import Header from "../components/Header";
 import Public from "../components/public";
 import Protected from "../components/Protected";
@@ -29,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <>
-          <Header />
+        <Header />
         {this.props.currentUser && this.props.currentUser._id ? (
           <Protected />
         ) : (
