@@ -47,8 +47,9 @@ class Signup extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(res => {
-        console.log(res, "cp");
+    .then(res => res.json())
+      .then(data => {
+        console.log(data, "cp");
         this.props.history.push("/Login");
       })
       .catch(error => console.error("Error:", error));
@@ -125,7 +126,7 @@ class Signup extends Component {
                       placeholder="email"
                       value={this.state.email}
                       onChange={this.changeHandler}
-                      readOnly={true}
+                      // readOnly={true}
                     />
                     <span className="icon is-small is-left">
                       <i className="fas fa-envelope" />

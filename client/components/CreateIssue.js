@@ -7,7 +7,6 @@ class createIssue extends Component {
     title: "",
     description: "",
     category: "electricity"
-
   };
 
   changeHandler = e => {
@@ -19,10 +18,10 @@ class createIssue extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    let createdBy = [this.props.currentUser.user._id];
+    let createdBy = this.props.currentUser.user._id;
     const { title, description, category } = this.state;
     let isUrgent = "Not Urgent";
-    const body = { title, description, category, createdBy,isUrgent };
+    const body = { title, description, category, createdBy, isUrgent };
     let res = fetch("http://localhost:3000/api/v1/issues", {
       method: "POST",
       body: JSON.stringify(body),
@@ -32,27 +31,29 @@ class createIssue extends Component {
       }
     })
       .then(res => res.json())
-      .then(data =>
-        fetch(`http://localhost:3000/api/v1/issues/${data.issue._id}`, {
-          method: "PUT",
-          body: JSON.stringify(body),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `token ${localStorage.token}`
-          }
-        })
-      )
-      .then(res => res.json())
-      .then(data => {
-        console.log(data, "create issue");
+      .then(data =>{
+
         this.props.history.push("/");
       })
-      .catch(error => console.error("Error:", error));
-  };
+    //   fetch(`http://localhost:3000/api/v1/issues/${data.issue._id}`, {
+    //     method: "PUT",
+    //     body: JSON.stringify(body),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `token ${localStorage.token}`
+    //     }
+    //   })
+    // )
+    // .then(res => res.json())
+    // .then(data => {
+    //   console.log(data, "create issue");
+    //   this.props.history.push("/");
+    // })
+    .catch(error => console.error("Error:", error));
+}
   render() {
     return (
       <>
-
         <div className="container">
           <div className="hero-body">
             <div className="column is-half is-offset-one-quarter has-background-light">

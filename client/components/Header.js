@@ -6,7 +6,8 @@ import { withRouter } from "react-router-dom";
 class Header extends Component {
   logoutHandler = () => {
     localStorage.setItem("token", "");
-    this.props.history.push("/Login");
+    this.props.dispatch({type: "LOG_OUT"});
+    this.props.history.push("/login");
   };
 
   onClick = () => {
@@ -17,6 +18,9 @@ class Header extends Component {
   };
 
   render() {
+    // console.log(this.props.state.currentUser.user);
+    const { user } = this.props.state.currentUser;
+    console.log(user, "check");
     return (
       <nav
         className="navbar has-shadow has-background-grey-lighter"
@@ -25,8 +29,7 @@ class Header extends Component {
       >
         <div className="container is-black">
           <div className="navbar-brand">
-            {this.props.state.currentUser.user &&
-            this.props.state.currentUser.user._id ? (
+            {user && user._id ? (
               <NavLink className="navbar-item" to="/">
                 ALTConcerns
               </NavLink>
@@ -48,7 +51,7 @@ class Header extends Component {
           <div className="navbar-menu">
             <div className="navbar-end">
               <div className="navbar-item">
-                {localStorage.token ? (
+                {user ? (
                   <div className="buttons">
                     <NavLink
                       to="/"
@@ -72,6 +75,14 @@ class Header extends Component {
                       </span>{" "}
                       <span>Raise An Issue</span>
                     </NavLink>
+                    {user && !user.isAdmin ? null : (
+                     <button className="button" onClick={this.logoutHandler}>
+                     <span className="icon">
+                     <i className="fas fa-user-friends"></i>{" "}
+                     </span>{" "}
+                     <span>Invite</span>
+                   </button>
+                    )}
                     <button className="button" onClick={this.logoutHandler}>
                       <span className="icon">
                         <i className="fas fa-sign-out-alt" />{" "}

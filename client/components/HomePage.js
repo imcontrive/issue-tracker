@@ -7,7 +7,7 @@ class HomePage extends Component {
     issues: [],
     category: ["all"],
     isResolved: "all",
-    isUrgent:"all"
+    isUrgent: "all"
   };
 
   handleFilter = (name, value) => {
@@ -32,6 +32,21 @@ class HomePage extends Component {
 
   render() {
     const issues = this.state.issues.Issues;
+    const filteredIssues = issues && issues.filter(elm =>
+      this.state.category[0] === "all"
+        ? true
+        : this.state.category[0] === elm.category[0]
+    )
+    .filter(elm =>
+      this.state.isResolved === "all"
+        ? true
+        : Boolean(this.state.isResolved) === elm.isResolved
+    )
+    .filter(elm =>
+      this.state.isUrgent === "all"
+        ? true
+        : this.state.isUrgent === elm.isUrgent
+    )
     return (
       <div className="container">
         <div className="columns hero-body">
@@ -52,9 +67,9 @@ class HomePage extends Component {
                             }}
                           >
                             <option value="all">All</option>
-                            <option value="veryUrgent">Very Urgent</option>
-                            <option value="urgent">Urgent</option>
-                            <option value="notUrgent">Not Urgent</option>
+                            <option value="Very Urgent">Very Urgent</option>
+                            <option value="Urgent">Urgent</option>
+                            <option value="Not Urgent">Not Urgent</option>
                           </select>
                         </div>
                       </div>
@@ -108,9 +123,9 @@ class HomePage extends Component {
             </div>
           </div>
           <div className="column is-9">
-            {issues &&
-              issues
-                .filter(elm =>
+            {/* {issues &&
+              issues */}
+                {/* .filter(elm =>
                   this.state.category[0] === "all"
                     ? true
                     : this.state.category[0] === elm.category[0]
@@ -123,21 +138,23 @@ class HomePage extends Component {
                 .filter(elm =>
                   this.state.isUrgent === "all"
                     ? true
-                    : (this.state.isUrgent) === elm.isUrgent
-                )
+                    : this.state.isUrgent === elm.isUrgent
+                ) */}
+               { filteredIssues && filteredIssues.length>0 ?
+                filteredIssues
                 .map((elm, index) => {
+                  console.log(elm.createdBy[0]);
                   let createdAt = new Date(elm.createdAt);
                   return (
                     <div key={index} className="card has-margin-bottom-25">
                       <div className="has-background-light">
                         <header className="card-header-title justify-space-between ">
-                          
                           <Link
                             to={{
                               pathname: `/singleIssue/${elm._id}`,
                               state: {
                                 IssueId: elm._id,
-                                userId: elm.createdBy[0]
+                                userId: elm.createdBy[0]._id
                               }
                             }}
                           >
@@ -145,15 +162,14 @@ class HomePage extends Component {
                           </Link>
 
                           <div>
-                          <Link
+                            <Link
                               to={{
                                 pathname: "/user",
-                                state: { userId: elm.createdBy[0] }
+                                state: { userId: elm.createdBy[0]._id }
                               }}
                             >
-                              <span>{elm.createdBy[0]}</span>
+                              <span>{elm.createdBy[0].firstname}</span>
                             </Link>
-                            
                           </div>
                         </header>
 
@@ -177,11 +193,9 @@ class HomePage extends Component {
                           </p>
 
                           <p className="card-footer-item">
-                           
-                          {createdAt.toDateString()}
+                            {createdAt.toDateString()}
                           </p>
                           <p className="card-footer-item">
-                           
                             <span>{elm.category}</span>
                           </p>
                           <p className="card-footer-item">
@@ -193,7 +207,7 @@ class HomePage extends Component {
                       </div>
                     </div>
                   );
-                })}
+                }):<p className="has-text-centered">nothing to see here, go back to where you came from</p>}
           </div>
         </div>
       </div>
