@@ -1,12 +1,56 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import imgActions from "../actions/imgActions"
+import keys from "../../key";
 
 class createIssue extends Component {
   state = {
     created: false,
     title: "",
     description: "",
-    category: "electricity"
+    category: "electricity",
+    image: "",
+    message:""
+  };
+
+  handleFile = event => {
+    const photo = event.target.files[0];
+    const sendImg = str => {
+      str ? this.setState({ image: str }) : null;
+    };
+
+    // file conversion to base64 using FileReader fn
+    const reader = new FileReader();
+    reader.onload = event => {
+      sendImg(event.target.result);
+    };
+    reader.readAsDataURL(photo);
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { image } = this.state;
+    const cloudData = { file: image, upload_preset: keys.UPLOAD_PRESET };
+
+    this.props.dispatch(
+      imgActions.cloudinaryImgUpload(cloudData, (success, img) => {
+
+        if (success) {
+          this.props.dispatch(
+            imgActions.uploadImage(img.secure_url, done => {
+              if (done) {
+                // this.props.history.push("/");
+                console.log("success")
+              }
+            })
+          );
+        } else {
+          this.setState({
+            message: img.error
+          });
+        }
+      })
+    );
   };
 
   changeHandler = e => {
@@ -31,26 +75,25 @@ class createIssue extends Component {
       }
     })
       .then(res => res.json())
-      .then(data =>{
-
+      .then(data => {
         this.props.history.push("/");
       })
-    //   fetch(`http://localhost:3000/api/v1/issues/${data.issue._id}`, {
-    //     method: "PUT",
-    //     body: JSON.stringify(body),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `token ${localStorage.token}`
-    //     }
-    //   })
-    // )
-    // .then(res => res.json())
-    // .then(data => {
-    //   console.log(data, "create issue");
-    //   this.props.history.push("/");
-    // })
-    .catch(error => console.error("Error:", error));
-}
+      //   fetch(`http://localhost:3000/api/v1/issues/${data.issue._id}`, {
+      //     method: "PUT",
+      //     body: JSON.stringify(body),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `token ${localStorage.token}`
+      //     }
+      //   })
+      // )
+      // .then(res => res.json())
+      // .then(data => {
+      //   console.log(data, "create issue");
+      //   this.props.history.push("/");
+      // })
+      .catch(error => console.error("Error:", error));
+  };
   render() {
     return (
       <>
@@ -106,14 +149,18 @@ class createIssue extends Component {
               </div>
             </div>
           </div>
+          <input
+            onChange={this.handleFile}
+            type="file"
+            placeholder="upload an image"
+          />
+          <input type="submit" onClick={this.handleSubmit} value="submit" />
         </div>
       </>
     );
   }
 }
 
-const mapPropsToState = state => {
-  return { currentUser: state.currentUser };
-};
+const mapPropsToState = state => state;
 
 export default connect(mapPropsToState)(createIssue);

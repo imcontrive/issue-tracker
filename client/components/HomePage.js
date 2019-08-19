@@ -27,6 +27,7 @@ class HomePage extends Component {
       }
     })
       .then(res => res.json())
+      // .then(data => console.log(data))
       .then(data => this.setState({ issues: data }));
   }
 
@@ -47,6 +48,7 @@ class HomePage extends Component {
         ? true
         : this.state.isUrgent === elm.isUrgent
     )
+    console.log(filteredIssues,"filteredIssues")
     return (
       <div className="container">
         <div className="columns hero-body">
@@ -142,14 +144,16 @@ class HomePage extends Component {
                 ) */}
                { filteredIssues && filteredIssues.length>0 ?
                 filteredIssues
+
                 .map((elm, index) => {
-                  console.log(elm.createdBy[0]);
+                  console.log(elm.createdBy._id);
                   let createdAt = new Date(elm.createdAt);
                   return (
                     <div key={index} className="card has-margin-bottom-25">
                       <div className="has-background-light">
                         <header className="card-header-title justify-space-between ">
-                          <Link
+                          <div><Link
+
                             to={{
                               pathname: `/singleIssue/${elm._id}`,
                               state: {
@@ -160,6 +164,8 @@ class HomePage extends Component {
                           >
                             <p className="content title is-4">{elm.title}</p>
                           </Link>
+                          <small>{createdAt.toDateString()}</small>
+                          </div>
 
                           <div>
                             <Link
@@ -170,6 +176,10 @@ class HomePage extends Component {
                             >
                               <span>{elm.createdBy[0].firstname}</span>
                             </Link>
+
+                            <span>
+                              {elm.isUrgent != undefined ? elm.isUrgent : null}
+                            </span>
                           </div>
                         </header>
 
@@ -193,16 +203,18 @@ class HomePage extends Component {
                           </p>
 
                           <p className="card-footer-item">
+
                             {createdAt.toDateString()}
                           </p>
                           <p className="card-footer-item">
+
                             <span>{elm.category}</span>
                           </p>
-                          <p className="card-footer-item">
+                          {/* <p className="card-footer-item">
                             <span>
                               {elm.isUrgent != undefined ? elm.isUrgent : null}
                             </span>
-                          </p>
+                          </p> */}
                         </footer>
                       </div>
                     </div>

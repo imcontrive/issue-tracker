@@ -125,7 +125,7 @@ class SingleIssue extends Component {
               <Link
                 to={{
                   pathname: "/user",
-                  state: { userId: issue.createdBy && issue.createdBy[0] }
+                  state: { userId: issue.createdBy && issue.createdBy[0]._id }
                 }}
               >
                 <p>username</p>

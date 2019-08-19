@@ -7,6 +7,7 @@ import SingleIssue from "./SingleIssue";
 import User from "./User";
 import UpdateUser from "./UpdateUser";
 import UpdateIssue from "./UpdateIssue";
+import InviteUser from "./InviteUser";
 
 export default class Protected extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class Protected extends Component {
         <Route path="/user" component={User} />
         <Route path="/UpdateUser" component={UpdateUser} />
         <Route path="/UpdateIssue" component={UpdateIssue} />
+        <Route path="/inviteUsers" component={InviteUser}/>
       </>
     );
   }

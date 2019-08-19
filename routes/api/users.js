@@ -44,7 +44,8 @@ router.post('/login', (req, res) => {
     if(user){
       var result = bcrypt.compareSync(data.password, user.password);
       if(result){
-        var token = jwt.sign({ _id: user._id }, process.env.SECRET);
+        console.log(process.env.SECRET, 'secret')
+        var token = jwt.sign({ _id: user._id }, "everybody lies");
         return res.status(200).json({success: true,token: token, user});
       }else {
         return res.status(400).json({success: false, error: "invalid password" });

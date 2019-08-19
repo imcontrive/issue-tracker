@@ -75,6 +75,7 @@ class Header extends Component {
                       </span>{" "}
                       <span>Raise An Issue</span>
                     </NavLink>
+
                     {user && !user.isAdmin ? null : (
                      <button className="button" onClick={this.logoutHandler}>
                      <span className="icon">
@@ -83,6 +84,7 @@ class Header extends Component {
                      <span>Invite</span>
                    </button>
                     )}
+
                     <button className="button" onClick={this.logoutHandler}>
                       <span className="icon">
                         <i className="fas fa-sign-out-alt" />{" "}
@@ -112,6 +114,19 @@ class Header extends Component {
                       </span>{" "}
                       <span>Log in</span>
                     </NavLink>
+                    {/* {
+                      this.props.user.user && this.props.user.user.isAdmin ? 
+                      <NavLink
+                      to="/inviteUsers"
+                      className="button"
+                      activeClassName="is-primary"
+                    >
+                      <span className="icon">
+                        <i className="fas fa-sign-in-alt" />{" "}
+                      </span>{" "}
+                      <span>inviteUsers</span>
+                    </NavLink>: ""
+                    } */}
                   </div>
                 )}
               </div>

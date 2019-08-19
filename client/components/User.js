@@ -32,7 +32,9 @@ class User extends Component {
         <div className="hero-body">
           <div className="container">
             <h1 className="title">{this.state.user.email}</h1>
-            <span className="title">{`${this.state.user.firstname} ${this.state.user.lastname}`}</span>
+            <span className="title">{`${this.state.user.firstname} ${
+              this.state.user.lastname
+            }`}</span>
             <div className="field is-grouped is-grouped-right">
               {this.props.user._id === this.props.location.state.userId ? (
                 <Link
