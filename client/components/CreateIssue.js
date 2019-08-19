@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import imgActions from "../actions/imgActions"
+import imgActions from "../actions/imgActions";
 import keys from "../../key";
 
 class createIssue extends Component {
@@ -10,7 +10,7 @@ class createIssue extends Component {
     description: "",
     category: "electricity",
     image: "",
-    message:""
+    message: ""
   };
 
   handleFile = event => {
@@ -34,16 +34,8 @@ class createIssue extends Component {
 
     this.props.dispatch(
       imgActions.cloudinaryImgUpload(cloudData, (success, img) => {
-
         if (success) {
-          this.props.dispatch(
-            imgActions.uploadImage(img.secure_url, done => {
-              if (done) {
-                // this.props.history.push("/");
-                console.log("success")
-              }
-            })
-          );
+          this.submitHandler(img.secure_url)
         } else {
           this.setState({
             message: img.error
@@ -60,12 +52,11 @@ class createIssue extends Component {
     });
   };
 
-  submitHandler = e => {
-    e.preventDefault();
+  submitHandler = (imgUrl) => {
     let createdBy = this.props.currentUser.user._id;
     const { title, description, category } = this.state;
     let isUrgent = "Not Urgent";
-    const body = { title, description, category, createdBy, isUrgent };
+    const body = { title, description, category, createdBy, isUrgent, imgUrl };
     let res = fetch("http://localhost:3000/api/v1/issues", {
       method: "POST",
       body: JSON.stringify(body),
@@ -78,20 +69,6 @@ class createIssue extends Component {
       .then(data => {
         this.props.history.push("/");
       })
-      //   fetch(`http://localhost:3000/api/v1/issues/${data.issue._id}`, {
-      //     method: "PUT",
-      //     body: JSON.stringify(body),
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: `token ${localStorage.token}`
-      //     }
-      //   })
-      // )
-      // .then(res => res.json())
-      // .then(data => {
-      //   console.log(data, "create issue");
-      //   this.props.history.push("/");
-      // })
       .catch(error => console.error("Error:", error));
   };
   render() {
@@ -139,22 +116,20 @@ class createIssue extends Component {
                     </select>
                   </div>
                 </div>
-
+                <input
+                  onChange={this.handleFile}
+                  type="file"
+                  placeholder="upload an image"
+                />
                 <button
                   className="button is-primary"
-                  onClick={this.submitHandler}
+                  onClick={this.handleSubmit}
                 >
                   Raise issue
                 </button>
               </div>
             </div>
           </div>
-          <input
-            onChange={this.handleFile}
-            type="file"
-            placeholder="upload an image"
-          />
-          <input type="submit" onClick={this.handleSubmit} value="submit" />
         </div>
       </>
     );

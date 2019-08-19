@@ -18,7 +18,8 @@ var issueSchema = new Schema({
     type: String,
     // default:"check"
   },
-  createdBy: [{ type: Schema.Types.ObjectId, ref: 'User'}]
+  createdBy: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+  images: [{ type: String }]
 }, {timestamps: true});
 
 

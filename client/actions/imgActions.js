@@ -2,24 +2,6 @@ import keys from "../../key";
 
 const imgActions = {
   // making request to server with image url which I am getting from cloudinary
-  uploadImage: (data, cb) => dispatch => {
-    fetch("/image/upload", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: localStorage.token
-      },
-      body: JSON.stringify({ image: data })
-    })
-      .then(res => res.json())
-      .then(image => {
-        if (image.msg) {
-          cb(true);
-        } else {
-          cb(false);
-        }
-      });
-  },
 
   // Uploading image to cloudinary
   cloudinaryImgUpload: (data, cb) => dispatch => {
@@ -32,7 +14,6 @@ const imgActions = {
     })
       .then(res => res.json())
       .then(image => {
-        console.log(image, 'image');
         if (!image.error) {
           cb(true, image);
         } else {

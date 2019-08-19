@@ -10,7 +10,7 @@ router.get("/", auth.verifyToken, (req, res) => {
   // fetch  allissue from database and send it in response
   Issue.find({})
     .sort({ createdAt: -1 })
-    .populate('createdBy')
+    .populate("createdBy")
     .exec((err, issues) => {
       if (err) res.status(500).json(err);
       // console.log(issues, "all issues");
@@ -22,14 +22,28 @@ router.get("/", auth.verifyToken, (req, res) => {
 router.post("/", (req, res) => {
   // fetch Issues data in req.body
   // save it to database using model
-  console.log(req.body);
-  Issue.create(req.body, (err, issue) => {
+  const {
+    title,
+    description,
+    category,
+    isUrgent,
+    createdBy,
+    imgUrl
+  } = req.body;
+  const newIssue = new Issue({
+    title,
+    description,
+    category,
+    createdBy,
+    isUrgent,
+    images: imgUrl
+  });
+  newIssue.save((err, issue) => {
     if (err) return res.json(err);
-          res.status(201).json({ issue: issue });
-        });
-    }
-  );
-
+    console.log(issue, 'create new issue');
+    res.status(201).json({ issue: issue });
+  });
+});
 
 // fetch single issue
 router.get("/:id", (req, res) => {
