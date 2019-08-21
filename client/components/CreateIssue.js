@@ -10,7 +10,8 @@ class createIssue extends Component {
     description: "",
     category: "electricity",
     image: "",
-    message: ""
+    message: "",
+    isLoading: false
   };
 
   handleFile = event => {
@@ -31,18 +32,24 @@ class createIssue extends Component {
     e.preventDefault();
     const { image } = this.state;
     const cloudData = { file: image, upload_preset: keys.UPLOAD_PRESET };
-
-    this.props.dispatch(
-      imgActions.cloudinaryImgUpload(cloudData, (success, img) => {
-        if (success) {
-          this.submitHandler(img.secure_url)
-        } else {
-          this.setState({
-            message: img.error
-          });
-        }
-      })
-    );
+    this.setState({
+      isLoading: true
+    });
+    if (!image) {
+      this.submitHandler();
+    } else {
+      this.props.dispatch(
+        imgActions.cloudinaryImgUpload(cloudData, (success, img) => {
+          if (success) {
+            this.submitHandler(img.secure_url);
+          } else {
+            this.setState({
+              message: img.error
+            });
+          }
+        })
+      );
+    }
   };
 
   changeHandler = e => {
@@ -52,12 +59,13 @@ class createIssue extends Component {
     });
   };
 
-  submitHandler = (imgUrl) => {
+  submitHandler = imgUrl => {
     let createdBy = this.props.currentUser.user._id;
     const { title, description, category } = this.state;
     let isUrgent = "Not Urgent";
     const body = { title, description, category, createdBy, isUrgent, imgUrl };
-    let res = fetch("http://localhost:3000/api/v1/issues", {
+
+    fetch("http://localhost:3000/api/v1/issues", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -67,6 +75,9 @@ class createIssue extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        this.setState({
+          isLoading: false
+        });
         this.props.history.push("/");
       })
       .catch(error => console.error("Error:", error));
@@ -74,63 +85,70 @@ class createIssue extends Component {
   render() {
     return (
       <>
-        <div className="container">
-          <div className="hero-body">
-            <div className="column is-half is-offset-one-quarter has-background-light">
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input"
-                    name="title"
-                    value={this.state.title}
-                    placeholder="title"
-                    onChange={this.changeHandler}
-                  />
-                </div>
-              </div>
-              <div className="field">
-                {" "}
-                <div className="control">
-                  <textarea
-                    className="textarea"
-                    name="description"
-                    value={this.state.description}
-                    placeholder="description"
-                    onChange={this.changeHandler}
-                  />
-                </div>
-              </div>
-
-              <div className="field is-grouped is-grouped-right">
-                <div className="control">
-                  <div className="select">
-                    <select
-                      name="category"
-                      value={this.state.category}
+        {!this.state.isLoading ? (
+          <div className="container">
+            <div className="hero-body">
+              <div className="column is-half is-offset-one-quarter has-background-light">
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className="input"
+                      name="title"
+                      value={this.state.title}
+                      placeholder="title"
                       onChange={this.changeHandler}
-                    >
-                      <option>water</option>
-                      <option>electricity</option>
-                      <option>food</option>
-                      <option>others</option>
-                    </select>
+                    />
                   </div>
                 </div>
-                <input
-                  onChange={this.handleFile}
-                  type="file"
-                  placeholder="upload an image"
-                />
-                <button
-                  className="button is-primary"
-                  onClick={this.handleSubmit}
-                >
-                  Raise issue
-                </button>
+                <div className="field">
+                  {" "}
+                  <div className="control">
+                    <textarea
+                      className="textarea"
+                      name="description"
+                      value={this.state.description}
+                      placeholder="description"
+                      onChange={this.changeHandler}
+                    />
+                  </div>
+                </div>
+
+                <div className="field is-grouped is-grouped-right">
+                  <div className="control">
+                    <div className="select">
+                      <select
+                        name="category"
+                        value={this.state.category}
+                        onChange={this.changeHandler}
+                      >
+                        <option>water</option>
+                        <option>electricity</option>
+                        <option>food</option>
+                        <option>others</option>
+                      </select>
+                    </div>
+                  </div>
+                  <input
+                    onChange={this.handleFile}
+                    type="file"
+                    placeholder="upload an image"
+                  />
+                  <button
+                    className="button is-primary"
+                    onClick={this.handleSubmit}
+                  >
+                    Raise issue
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <>
+            <p>creating issue</p>
+            <a className="button is-info is-loading">creating issue</a>
+          </>
+        )}
       </>
     );
   }

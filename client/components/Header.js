@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 class Header extends Component {
   logoutHandler = () => {
     localStorage.setItem("token", "");
-    this.props.dispatch({type: "LOG_OUT"});
+    this.props.dispatch({ type: "LOG_OUT" });
     this.props.history.push("/login");
   };
 
@@ -77,12 +77,18 @@ class Header extends Component {
                     </NavLink>
 
                     {user && !user.isAdmin ? null : (
-                     <button className="button" onClick={this.logoutHandler}>
-                     <span className="icon">
-                     <i className="fas fa-user-friends"></i>{" "}
-                     </span>{" "}
-                     <span>Invite</span>
-                   </button>
+                      <NavLink
+                        to="/inviteUsers"
+                        // className="button"
+                        activeClassName="is-primary"
+                      >
+                        <button className="button">
+                          <span className="icon">
+                            <i className="fas fa-user-friends" />{" "}
+                          </span>{" "}
+                          <span>Invite</span>
+                        </button>
+                      </NavLink>
                     )}
 
                     <button className="button" onClick={this.logoutHandler}>

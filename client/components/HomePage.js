@@ -149,7 +149,10 @@ class HomePage extends Component {
                   console.log(elm.createdBy._id);
                   let createdAt = new Date(elm.createdAt);
                   return (
+                   
                     <div key={index} className="card has-margin-bottom-25">
+                       
+
                       <div className="has-background-light">
                         <header className="card-header-title justify-space-between ">
                           <div><Link
@@ -176,7 +179,7 @@ class HomePage extends Component {
                             >
                               <span>{elm.createdBy[0].firstname}</span>
                             </Link>
-
+                            {" "}
                             <span>
                               {elm.isUrgent != undefined ? elm.isUrgent : null}
                             </span>
@@ -202,10 +205,7 @@ class HomePage extends Component {
                             </span>
                           </p>
 
-                          <p className="card-footer-item">
-
-                            {createdAt.toDateString()}
-                          </p>
+                          
                           <p className="card-footer-item">
 
                             <span>{elm.category}</span>
@@ -217,6 +217,7 @@ class HomePage extends Component {
                           </p> */}
                         </footer>
                       </div>
+                  
                     </div>
                   );
                 }):<p className="has-text-centered">nothing to see here, go back to where you came from</p>}

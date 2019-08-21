@@ -40,7 +40,6 @@ router.post("/", (req, res) => {
   });
   newIssue.save((err, issue) => {
     if (err) return res.json(err);
-    console.log(issue, 'create new issue');
     res.status(201).json({ issue: issue });
   });
 });
@@ -53,7 +52,6 @@ router.get("/:id", (req, res) => {
     .populate("createdBy")
     .exec((err, issue) => {
       if (err) return res.json(err);
-      console.log(issue, "dfdfdfd...............");
       res.status(201).json({ issue: issue });
     });
 });
