@@ -36,7 +36,6 @@ var userSchema = new Schema({
 }, {timestamps: true});
 
 userSchema.pre('save', function (next) {
-	// console.log('pt 1', this);
   if(this.password && this.isModified('password')) {
 		this.password = bcrypt.hashSync(this.password, salt);
   }

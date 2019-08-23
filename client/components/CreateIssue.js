@@ -1,12 +1,58 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import imgActions from "../actions/imgActions";
+import keys from "../../key";
+import issueAction from "../actions/issue.action";
+import io from "socket.io-client";
+const socket = io();
 
 class createIssue extends Component {
   state = {
     created: false,
     title: "",
     description: "",
-    category: "electricity"
+    category: "electricity",
+    image: "",
+    message: "",
+    isLoading: false
+  };
+
+  handleFile = event => {
+    const photo = event.target.files[0];
+    const sendImg = str => {
+      str ? this.setState({ image: str }) : null;
+    };
+
+    // file conversion to base64 using FileReader fn
+    const reader = new FileReader();
+    reader.onload = event => {
+      sendImg(event.target.result);
+    };
+    reader.readAsDataURL(photo);
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { image } = this.state;
+    const cloudData = { file: image, upload_preset: keys.UPLOAD_PRESET };
+    this.setState({
+      isLoading: true
+    });
+    if (!image) {
+      this.submitHandler();
+    } else {
+      this.props.dispatch(
+        imgActions.cloudinaryImgUpload(cloudData, (success, img) => {
+          if (success) {
+            this.submitHandler(img.secure_url);
+          } else {
+            this.setState({
+              message: img.error
+            });
+          }
+        })
+      );
+    }
   };
 
   changeHandler = e => {
@@ -16,16 +62,13 @@ class createIssue extends Component {
     });
   };
 
-  submitHandler = e => {
-    e.preventDefault();
-    console.log(this.props.currentUser);
-    let createdBy = [this.props.currentUser.user._id];
+  submitHandler = imgUrl => {
+    let createdBy = this.props.currentUser.user._id;
     const { title, description, category } = this.state;
+    let isUrgent = "Not Urgent";
+    const body = { title, description, category, createdBy, isUrgent, imgUrl };
 
-    const body = { title, description, category, createdBy };
-    console.log(body, "user");
-
-   let res = fetch("http://localhost:3000/api/v1/issues", {
+    fetch("http://localhost:3000/api/v1/issues", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -33,75 +76,89 @@ class createIssue extends Component {
         Authorization: `token ${localStorage.token}`
       }
     })
-      // let data = res.json()
-
-      // // let arr = await data.issue.createdBy
-
-      // // let newArr = await [...arr].push("a")
-
-      // console.log(data)
-      // .then(data => {
-      // //   // console.log(data.issue.createdBy)
-      //   let arr = data.issue.createdBy
-      // //   // console.log(arr,"cp3")
-      //   body.createdby = [...arr].push("a")
-      //   console.log(body.createdBy,"cp4");
-      // return data
-      // })
-      .then(res => res.json())
-      // .then(data => console.log(data, "cp2"))
-      .then(data =>
-        fetch(`http://localhost:3000/api/v1/issues/${data.issue._id}`, {
-          method: "PUT",
-          body: JSON.stringify(body),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `token ${localStorage.token}`
-          }
-        })
-      )
       .then(res => res.json())
       .then(data => {
-        console.log(data, "create issue");
-        this.props.history.push("/");
+        if (data.success) {
+          this.setState({
+            isLoading: false
+          });
+          this.props.history.push("/");
+        }
       })
       .catch(error => console.error("Error:", error));
   };
   render() {
     return (
       <>
-        <form>
-          <input
-            name="title"
-            value={this.state.title}
-            placeholder="title"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="description"
-            value={this.state.description}
-            placeholder="description"
-            onChange={this.changeHandler}
-          />
-          <select
-            name="category"
-            value={this.state.category}
-            onChange={this.changeHandler}
-          >
-            <option>water</option>
-            <option>electricity</option>
-            <option>food</option>
-            <option>others</option>
-          </select>
-          <button onClick={this.submitHandler}>Raise issue</button>
-        </form>
+        {!this.state.isLoading ? (
+          <div className="container">
+            <div className="hero-body">
+              <div className="column is-half is-offset-one-quarter has-background-light">
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className="input"
+                      name="title"
+                      value={this.state.title}
+                      placeholder="title"
+                      onChange={this.changeHandler}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  {" "}
+                  <div className="control">
+                    <textarea
+                      className="textarea"
+                      name="description"
+                      value={this.state.description}
+                      placeholder="description"
+                      onChange={this.changeHandler}
+                    />
+                  </div>
+                </div>
+
+                <div className="field is-grouped is-grouped-right">
+                  <div className="control">
+                    <div className="select">
+                      <select
+                        name="category"
+                        value={this.state.category}
+                        onChange={this.changeHandler}
+                      >
+                        <option>water</option>
+                        <option>electricity</option>
+                        <option>food</option>
+                        <option>others</option>
+                      </select>
+                    </div>
+                  </div>
+                  <input
+                    onChange={this.handleFile}
+                    type="file"
+                    placeholder="upload an image"
+                  />
+                  <button
+                    className="button is-primary"
+                    onClick={this.handleSubmit}
+                  >
+                    Raise issue
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            <p>creating issue</p>
+            <a className="button is-info is-loading">creating issue</a>
+          </>
+        )}
       </>
     );
   }
 }
 
-const mapPropsToState = state => {
-  return { currentUser: state.currentUser };
-};
+const mapPropsToState = state => state;
 
 export default connect(mapPropsToState)(createIssue);

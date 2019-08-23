@@ -15,14 +15,17 @@ var issueSchema = new Schema({
 		default: false,
   },
   isUrgent:{
-    type: Number,
-    enum: [0, 1, 2, 3]
+    type: String,
+    // default:"check"
   },
-  createdBy: [{ type: Schema.Types.ObjectId, ref: 'User'}]
+  createdBy: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+  images: [{ type: String }]
 }, {timestamps: true});
 
 
 
 var Issue = mongoose.model("Issue", issueSchema);
+
+// console.log(Issue.schema.path("isUrgent").enumValues, 'check')
 
 module.exports = Issue;

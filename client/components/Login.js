@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -16,7 +16,6 @@ class Login extends Component {
   };
 
   loginHandler = e => {
-    console.log("login");
     e.preventDefault();
     const { email, password } = this.state;
     const body = { email, password };
@@ -28,48 +27,82 @@ class Login extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(res => res.json())
-      .then(data => {
-        localStorage.setItem("token",data.token)
-        this.props.dispatch({type:'USER_LOGIN_SUCCESS',data})
-        this.props.history.push("/")
-        console.log(data)
+      .then(res => {
+        return res.status === 200
+          ? res.json().then(data => {
+              localStorage.setItem("token", data.token);
+              this.props.dispatch({ type: "USER_LOGIN_SUCCESS", data });
+              this.props.history.push("/");
+            })
+          : console.log(res, "errror from backend");
       })
       .catch(error => console.error("Error:", error));
-
   };
   render() {
     return (
-      <>
-        <div class="isLoginWrapper">
-					<div class="grid">
-						<form class="form login">
-							<div class="form__field">
-								<label for="email">
-									<svg class="icon">
-										<span class="hidden">Email</span>
-									</svg>
-								</label>
-								<input id="login__username" type="text" class="form__input" placeholder="Email" onChange={this.changeHandler} name='email' type="email"  value={this.state.email}  required />
-							</div>
+      <form>
+        <section className="hero is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="container">
+              <p className="title has-text-centered">Login</p>
+              <div className="column is-half is-offset-one-quarter box has-background-light">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      name="email"
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left">
+                    <input
+                      className="input"
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-lock" />
+                    </span>
+                  </p>
+                </div>
 
-							<div class="form__field">
-								<label for="password">
-									<svg class="icon">
-										<span class="hidden">Password</span>
-									</svg>
-								</label>
-								<input id="login__password" type="password" name="password" class="form__input" placeholder="Password" name='password' onChange={this.changeHandler} type="password" value={ this.state.password } required />
-							</div>
+                {this.state.email && this.state.password ? (
+                  <div className="field is-grouped is-grouped-right">
+                    <button
+                      className="button is-primary"
+                      onClick={this.loginHandler}
+                    >
+                      LOG IN
+                    </button>
+                  </div>
+                ) : (
+                  <p className="has-text-danger has-text-centered">
+                    Plz fill all the filled
+                  </p>
+                )}
 
-							<div class="form__field">
-								<input type="submit" value="Sign In" onClick={this.loginHandler}/>
-							</div>
-						</form>
-						<p class="text--center rg-link">Don't have an account?<Link to="/register" className="link-sn">Sign up now</Link></p>
-				</div>
-			</div>
-      </>
+                <p className="has-text-centered">
+                  <Link to="/register">Don't have an account? Sign Up</Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </form>
     );
   }
 }
