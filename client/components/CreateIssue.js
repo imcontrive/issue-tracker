@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import imgActions from "../actions/imgActions";
 import keys from "../../key";
+import issueAction from "../actions/issue.action";
+import io from 'socket.io-client';
+const socket = io();
 
 class createIssue extends Component {
   state = {
@@ -75,10 +78,13 @@ class createIssue extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        this.setState({
-          isLoading: false
-        });
-        this.props.history.push("/");
+        // console.log(data, 'data in create issue');
+        if (data.success) {
+          this.setState({
+            isLoading: false
+          });
+          this.props.history.push("/");
+        }
       })
       .catch(error => console.error("Error:", error));
   };

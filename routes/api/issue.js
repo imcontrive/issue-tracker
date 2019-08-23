@@ -1,9 +1,13 @@
 var express = require("express");
 var router = express.Router();
 var Issue = require("../../models/Issue");
+var Notification = require("../../models/Notification");
+const ntfsController = require("../../controller/notification.controller").notify();
 var auth = require("../../utils/verifyToken");
 
-router.use(auth.verifyToken);
+// router.use(auth.verifyToken);
+
+router.get("/notification", ntfsController.getNotification);
 
 // List all the issues raised by all users
 router.get("/", auth.verifyToken, (req, res) => {
@@ -19,7 +23,7 @@ router.get("/", auth.verifyToken, (req, res) => {
 });
 
 // create Issue
-router.post("/", (req, res) => {
+router.post("/", auth.verifyToken, (req, res) => {
   // fetch Issues data in req.body
   // save it to database using model
   const {
@@ -38,9 +42,27 @@ router.post("/", (req, res) => {
     isUrgent,
     images: imgUrl
   });
-  newIssue.save((err, issue) => {
+  newIssue.save((err, createdIssue) => {
     if (err) return res.json(err);
-    res.status(201).json({ issue: issue });
+    else {
+      const id = req.user._id;
+      newNotification = new Notification({
+        user: id,
+        issue: createdIssue._id
+      });
+      newNotification.save((err, notification) => {
+        // console.log(notification, 'notification');
+        if (err) {
+          return res.json(err);
+        } else {
+          return res.status(200).json({
+            success: true,
+            issue: createdIssue,
+            notification
+          });
+        }
+      });
+    }
   });
 });
 
