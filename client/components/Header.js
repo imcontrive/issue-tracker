@@ -29,13 +29,16 @@ class Header extends Component {
       >
         <div className="container is-black">
           <div className="navbar-brand">
-            {user && user._id ? (
+            {/* {user && user._id ? (
               <NavLink className="navbar-item" to="/">
                 ALTConcerns
               </NavLink>
             ) : (
               <p className="navbar-item">ALTConcerns</p>
-            )}
+            )} */}
+            <NavLink className="navbar-item" to="/">
+              ALTConcerns
+            </NavLink>
             <a
               role="button"
               className="navbar-burger burger"
@@ -51,7 +54,7 @@ class Header extends Component {
           <div className="navbar-menu">
             <div className="navbar-end">
               <div className="navbar-item">
-                {user ? (
+                {user && user ? (
                   <div className="buttons">
                     <NavLink
                       to="/"

@@ -4,12 +4,10 @@ import Header from "../components/Header";
 import Public from "../components/public";
 import Protected from "../components/Protected";
 
-
 class App extends Component {
   state = {
     token: ""
   };
-
 
   componentDidMount() {
     fetch(`http://localhost:3000/api/v1/users/me`, {
@@ -24,19 +22,16 @@ class App extends Component {
         this.props.dispatch({ type: "USER_RELOAD", data });
       });
   }
-  
 
   render() {
     return (
       <React.Fragment>
         <Header />
-        
-          {this.props.currentUser && this.props.currentUser._id ? (
-            <Protected />
-          ) : (
-            <Public />
-          )}
-          
+        {this.props.currentUser && this.props.currentUser._id ? (
+          <Protected />
+        ) : (
+          <Public />
+        )}
       </React.Fragment>
     );
   }
