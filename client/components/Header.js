@@ -79,15 +79,13 @@ class Header extends Component {
                     {user && !user.isAdmin ? null : (
                       <NavLink
                         to="/inviteUsers"
-                        // className="button"
+                        className="button"
                         activeClassName="is-primary"
                       >
-                        <button className="button">
-                          <span className="icon">
-                            <i className="fas fa-user-friends" />{" "}
-                          </span>{" "}
-                          <span>Invite</span>
-                        </button>
+                        <span className="icon">
+                          <i className="fas fa-user-friends" />{" "}
+                        </span>{" "}
+                        <span>Invite</span>
                       </NavLink>
                     )}
 
