@@ -11,7 +11,6 @@ export default class Public extends Component {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Signup} />
       <Route render={() => <h1>Hello</h1>} />
-
     </Switch>
     );
   }
