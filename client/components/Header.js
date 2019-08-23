@@ -1,29 +1,55 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 class Header extends Component {
-
   logoutHandler = () => {
-    localStorage.setItem("token","")
-    this.props.history.push("/Login")
-  }
+    localStorage.setItem("token", "");
+    this.props.dispatch({ type: "LOG_OUT" });
+    this.props.history.push("/login");
+  };
+
+  onClick = () => {
+    let toggle = document.querySelector(".burger");
+    let menu = document.querySelector(".navbar-menu");
+    toggle.classList.toggle("is-active");
+    menu.classList.toggle("is-active");
+  };
 
   render() {
-      // console.log(this.props.state.currentUser)
+    const { user } = this.props.state.currentUser;
     return (
-      <div>
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav
+        className="navbar has-shadow has-background-grey-lighter"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div className="container is-black">
           <div className="navbar-brand">
-            <NavLink className="navbar-item" to="/">
-              <h4>ALTConcerns</h4>
-            </NavLink>
+            {user && user._id ? (
+              <NavLink className="navbar-item" to="/">
+                ALTConcerns
+              </NavLink>
+            ) : (
+              <p className="navbar-item">ALTConcerns</p>
+            )}
+            <a
+              role="button"
+              className="navbar-burger burger"
+              aria-label="menu"
+              aria-expanded="false"
+              onClick={this.onClick}
+            >
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+            </a>
           </div>
-          <div id="navbarBasicExample" className="navbar-menu">
+          <div className="navbar-menu">
             <div className="navbar-end">
               <div className="navbar-item">
-                {localStorage.token ? (
+                {user ? (
                   <div className="buttons">
                     <NavLink
                       to="/"
@@ -31,17 +57,41 @@ class Header extends Component {
                       className="button"
                       activeClassName="is-primary"
                     >
-                      <strong>Home</strong>
+                      {" "}
+                      <span className="icon">
+                        <i className="fas fa-home" />
+                      </span>
+                      <span>Home</span>
                     </NavLink>
                     <NavLink
                       to="/createIssue"
                       className="button"
                       activeClassName="is-primary"
                     >
-                      Raise An Issue
+                      <span className="icon">
+                        <i className="fas fa-plus" />{" "}
+                      </span>{" "}
+                      <span>Raise An Issue</span>
                     </NavLink>
-                    <button onClick={this.logoutHandler}>
-                      logout
+
+                    {user && !user.isAdmin ? null : (
+                      <NavLink
+                        to="/inviteUsers"
+                        className="button"
+                        activeClassName="is-primary"
+                      >
+                        <span className="icon">
+                          <i className="fas fa-user-friends" />{" "}
+                        </span>{" "}
+                        <span>Invite</span>
+                      </NavLink>
+                    )}
+
+                    <button className="button" onClick={this.logoutHandler}>
+                      <span className="icon">
+                        <i className="fas fa-sign-out-alt" />{" "}
+                      </span>{" "}
+                      <span>Logout</span>
                     </button>
                   </div>
                 ) : (
@@ -51,28 +101,34 @@ class Header extends Component {
                       className="button"
                       activeClassName="is-primary"
                     >
-                      <strong>Sign Up</strong>
+                      <span className="icon">
+                        <i className="fas fa-user-plus" />{" "}
+                      </span>{" "}
+                      <div>Sign Up</div>
                     </NavLink>
                     <NavLink
                       to="/login"
                       className="button"
                       activeClassName="is-primary"
                     >
-                      Log In
+                      <span className="icon">
+                        <i className="fas fa-sign-in-alt" />{" "}
+                      </span>{" "}
+                      <span>Log in</span>
                     </NavLink>
                   </div>
                 )}
               </div>
             </div>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     );
   }
 }
 
-const mapPropsToState = (state) => {
-    return {state}
-  }
+const mapPropsToState = state => {
+  return { state };
+};
 
-export default withRouter(connect(mapPropsToState)(Header))
+export default withRouter(connect(mapPropsToState)(Header));

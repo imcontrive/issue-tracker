@@ -1,15 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import queryString from "query-string";
 
 class Signup extends Component {
   state = {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     phonenumber: "",
     email: "",
     password: "",
     cnfmPassword: ""
   };
+
+  // Invitation handling in CDM
+  componentDidMount() {
+    const refCode = queryString.parse(location.search).ref;
+    console.log(refCode, "ref");
+    fetch(`http://localhost:3000/api/v1/invites/${refCode}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          this.setState({
+            email: data.user.email
+          });
+        }
+      });
+  }
 
   changeHandler = e => {
     const { name, value } = e.target;
@@ -19,11 +35,9 @@ class Signup extends Component {
   };
 
   signupHandler = e => {
-    // console.log("signup");
     e.preventDefault();
-    const { firstName, lastName, email, phonenumber, password } = this.state;
-    const body = { firstName, lastName, email, phonenumber, password };
-
+    const { firstname, lastname, email, phonenumber, password } = this.state;
+    const body = { firstname, lastname, email, phonenumber, password };
     fetch("http://localhost:3000/api/v1/users/register", {
       method: "POST",
       body: JSON.stringify(body),
@@ -31,164 +45,132 @@ class Signup extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(res => {
+      .then(res => res.json())
+      .then(data => {
+        console.log(data, "cp");
         this.props.history.push("/Login");
       })
       .catch(error => console.error("Error:", error));
-
-    // console.log(body);
   };
+
   render() {
-    const {
-      firstName,
-      lastName,
-      phonenumber,
-      email,
-      password,
-      cnfmPassword
-    } = this.state;
+    const { firstname, lastname, phonenumber, email, password } = this.state;
     return (
-      <>
-        <div className="isLoginWrapper">
-          <div className="grid">
-            <h2 className="signup-title">Register</h2>
-            <form className="form login">
-              <div className="form__field">
-                <label for="email">
-                  <svg className="icon">
-                    <span className="hidden">FirstName</span>
-                  </svg>
-                </label>
-                <input
-                  id="login__username"
-                  type="text"
-                  className="form__input"
-                  name="firstName"
-                  value={this.state.firstName}
-                  placeholder="firstName"
-                  onChange={this.changeHandler}
-                  required
-                />
-              </div>
-              <div className="form__field">
-                <label for="email">
-                  <svg className="icon">
-                    <span className="hidden">LastName</span>
-                  </svg>
-                </label>
-                <input
-                  id="login__username"
-                  type="text"
-                  className="form__input"
-                  name="lastName"
-                  value={this.state.lastName}
-                  placeholder="lastName"
-                  onChange={this.changeHandler}
-                  required
-                />
-              </div>
-              <div className="form__field">
-                <label for="email">
-                  <svg className="icon">
-                    <span className="hidden">phoneNumber</span>
-                  </svg>
-                </label>
-                <input
-                  id="login__username"
-                  type="text"
-                  className="form__input"
-                  name="phonenumber"
-                  value={this.state.phonenumber}
-                  placeholder="phone number"
-                  onChange={this.changeHandler}
-                  required
-                />
-              </div>
-              <div className="form__field">
-                <label for="email">
-                  <svg className="icon">
-                    <span className="hidden">phoneNumber</span>
-                  </svg>
-                </label>
-                <input
-                  id="login__username"
-                  type="text"
-                  className="form__input"
-                  placeholder="Email"
-                  onChange={this.changeHandler}
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  required
-                />
-              </div>
+      <React.Fragment>
+        <section className="hero is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="container">
+              <p className="title has-text-centered">Sign Up</p>
+              <div className="column is-half is-offset-one-quarter box has-background-light">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      name="firstname"
+                      value={this.state.firstName}
+                      placeholder="firstName"
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-user" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      name="lastname"
+                      value={this.state.lastName}
+                      placeholder="lastName"
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-user" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      name="phonenumber"
+                      value={this.state.phonenumber}
+                      placeholder="phone number"
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-mobile" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      name="email"
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.changeHandler}
+                      // readOnly={true}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i className="fas fa-check" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left">
+                    <input
+                      className="input"
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.changeHandler}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-lock" />
+                    </span>
+                  </p>
+                </div>
 
-              <div className="form__field">
-                <label for="password">
-                  <svg className="icon">
-                    <span className="hidden">Password</span>
-                  </svg>
-                </label>
-                <input
-                  id="login__password"
-                  type="password"
-                  name="password"
-                  className="form__input"
-                  placeholder="Password"
-                  name="password"
-                  onChange={this.changeHandler}
-                  type="password"
-                  value={this.state.password}
-                  required
-                />
-              </div>
-              <div className="form__field">
-                <label for="password">
-                  <svg className="icon">
-                    <span className="hidden">Password</span>
-                  </svg>
-                </label>
-                <input
-                  id="login__password"
-                  type="password"
-                  name="cnfmPassword"
-                  className="form__input"
-                  placeholder=" Confirm Password"
-                  onChange={this.changeHandler}
-                  type="password"
-                  value={this.state.cnfmPassword}
-                  required
-                />
-              </div>
-
-              <div className="form__field">
-                {firstName &&
-                lastName &&
-                phonenumber &&
-                email &&
-                password &&
-                cnfmPassword ? (
-                  <input
-                    type="submit"
-                    value="REGISTER"
-                    onClick={this.signupHandler}
-                  />
+                {firstname && lastname && phonenumber && email && password ? (
+                  <div className="field is-grouped is-grouped-right">
+                    <button
+                      className="button is-primary"
+                      onClick={this.signupHandler}
+                    >
+                      SIGN UP
+                    </button>
+                  </div>
                 ) : (
-                  <p style={{ color: "red", paddingLeft: "50px" }}>
+                  <p className="has-text-centered has-text-danger">
                     Please Fill all the field
                   </p>
                 )}
+
+                <p className="has-text-centered">
+                  <Link to="/login">Already have an account? LogIn</Link>
+                </p>
               </div>
-            </form>
-            <p className="text--center rg-link">
-              Already have an account?
-              <Link to="/login" className="link-sn">
-                LOGIN NOW
-              </Link>
-            </p>
+            </div>
           </div>
-        </div>
-      </>
+        </section>
+      </React.Fragment>
     );
   }
 }

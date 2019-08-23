@@ -9,7 +9,6 @@ var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
-var userRouter
 
 var app = express();
 
@@ -68,9 +67,9 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Route handler
+
 app.use('/api/v1', apiRouter) // api route handler
 app.use('/', indexRouter); // react handler
-// app.use('/users',userRouter); // user handler
 
 
 // catch 404 and forward to error handler
@@ -80,6 +79,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

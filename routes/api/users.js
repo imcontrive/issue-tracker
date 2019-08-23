@@ -23,6 +23,8 @@ router.post('/register', (req, res) => {
   })
 })
 
+// routes for finding currentLogin Users
+
 router.get('/me',auth.verifyToken, (req,res) => {
   console.log(req.user, "/me....")
   User.findById(req.user._id, (err, user) => {
@@ -42,6 +44,7 @@ router.post('/login', (req, res) => {
     if(user){
       var result = bcrypt.compareSync(data.password, user.password);
       if(result){
+        console.log(process.env.SECRET, 'secret')
         var token = jwt.sign({ _id: user._id }, process.env.SECRET);
         return res.status(200).json({success: true,token: token, user});
       }else {
