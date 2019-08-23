@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import createIssue from "./CreateIssue";
 import HomePage from "./HomePage";
@@ -12,7 +12,7 @@ import InviteUser from "./InviteUser";
 export default class Protected extends Component {
   render() {
     return (
-      <>
+      <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/createIssue" component={createIssue} />
         <Route path="/singleIssue" component={SingleIssue} />
@@ -20,7 +20,7 @@ export default class Protected extends Component {
         <Route path="/UpdateUser" component={UpdateUser} />
         <Route path="/UpdateIssue" component={UpdateIssue} />
         <Route path="/inviteUsers" component={InviteUser}/>
-      </>
+      </Switch>
     );
   }
 }
