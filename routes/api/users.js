@@ -44,7 +44,7 @@ router.post('/login', (req, res) => {
     if(user){
       var result = bcrypt.compareSync(data.password, user.password);
       if(result){
-        console.log(process.env.SECRET, 'secret')
+        // console.log(process.env.SECRET, 'secret')
         var token = jwt.sign({ _id: user._id }, process.env.SECRET);
         return res.status(200).json({success: true,token: token, user});
       }else {
