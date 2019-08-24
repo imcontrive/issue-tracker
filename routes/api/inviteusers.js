@@ -54,12 +54,15 @@ router.post('/', (req, res) => {
           html: `Hello, <br>You've been invited to join issueTrackr.<br><br>Please <a href='${link}'>click here</a> to join.<br><br>Regards,<br>issue-Trackr`
         }
         smtpTransport.sendMail(mailOptions, (err, info) => {
+          console.log("err in check",err);
           if (err) return res.status(406).json({ error: "Encountered a problem while sending the invitation email" });
-          return res.json({
-            success: true,
-            message: `Invitation email sent to ${mailOptions.to}`});
-        });
-      }
+          if(info) {
+            return res.status(200).json({
+              success: true,
+              message: `Invitation email sent to ${mailOptions.to}`});
+          };
+        }
+        )}
 
     })
 
