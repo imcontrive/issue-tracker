@@ -1,47 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux"
+import React from "react";
 
-class Home extends Component{
-
-  state={
-    issues:[]
-  }
-
-  componentDidMount(){
-    fetch("http://localhost:3000/api/v1/issues",{
-      method:"GET",
-      headers:{
-        "Authorization":`Token ${localStorage.token}`
-      }
-    })
-    .then(res => res.json())
-    .then(data =>
-      this.props.dispatch({type:'ADD_ISSUES',data})
-     );
-  }
-
-  
-  render(){
-    const { IssuesInfo } = this.props.state;
-
-    return(
-      <>
-      {
-        IssuesInfo.Issues ? IssuesInfo.Issues.map((issue, index) => 
-          <p><small>{index}</small>{issue.title}</p>
-        ):""
-      }
-      
-      </>
-    )
-  }
+export function Home() {
+  return (
+    <section className="hero is-light is-fullheight-with-navbar">
+      <div className="hero-body">
+        <div className="container">
+          <h1 className="has-text-centered is-size-1">ALTConcerns</h1>
+          <div className="subtitle has-text-centered">
+           <p> A simple issue tracker for altcampus.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
-
-const mapPropsToState = (state) => {
-  console.log(state,"state in home");
-  return {
-    state
-  }
-}
-
-export default connect(mapPropsToState)(Home);

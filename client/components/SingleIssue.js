@@ -39,7 +39,7 @@ class SingleIssue extends Component {
 
   handleUrgentStateChange = (name, value) => {
     this.setState({
-      [name]: value,
+      [name]: value
       // isUrgent: "notUrgent"
     });
   };
@@ -71,7 +71,7 @@ class SingleIssue extends Component {
         this.setState({
           // isResolved: data.issue.isResolved,
           // IssueId: data.issue._id,
-          issue: data.issue,
+          issue: data.issue
           // isUrgent: data.issue.isUrgent
         });
       })
@@ -79,6 +79,8 @@ class SingleIssue extends Component {
   };
 
   componentDidMount() {
+    // let IssueId = this.props.history.location.state.IssueId
+    // console.log(IssueId,"cdm si")
     fetch(
       `http://localhost:3000/api/v1/issues/${this.props.location.state
         .IssueId ||
@@ -91,13 +93,14 @@ class SingleIssue extends Component {
         }
       }
     )
+      // .then(res => console.log(res))
       .then(res => res.json())
 
       .then(data => {
         // console.log(data.issue, "single issue fetch render");
         this.setState({
           issue: data.issue,
-          isResolved: data.issue.isResolved,
+          isResolved: data.issue.isResolved
           // isUrgent: data.issue.isUrgent
         });
       })
@@ -107,7 +110,7 @@ class SingleIssue extends Component {
   render() {
     // console.log(this.state.issue);
     // console.log( this.props.history.location.state.IssueId);
-    console.log("cp");
+    console.log(this.state.issue, "cp");
 
     const issue = this.state.issue;
     return (
@@ -125,7 +128,7 @@ class SingleIssue extends Component {
               <Link
                 to={{
                   pathname: "/user",
-                  state: { userId: issue.createdBy && issue.createdBy[0] }
+                  state: { userId: issue.createdBy && issue.createdBy[0]._id }
                 }}
               >
                 <p>username</p>
@@ -159,32 +162,41 @@ class SingleIssue extends Component {
               ) : null}
             </nav>
             {this.props.user.isAdmin ? (
-          <div className="field">
-            <div className="control">
-              <div className="select">
-                <select
-                  name="isUrgent"
-                  onChange={e => {
-                    this.handleUrgentStateChange(e.target.name, e.target.value);
-                  }}
-                >
-                  <option value="Very Urgent">Very Urgent</option>
-                  <option value="Urgent">Urgent</option>
-                  <option value="Not Urgent">Not Urgent</option>
-                </select>
+              <div className="field">
+                <div className="control">
+                  <div className="select">
+                    <select
+                      name="isUrgent"
+                      onChange={e => {
+                        this.handleUrgentStateChange(
+                          e.target.name,
+                          e.target.value
+                        );
+                      }}
+                    >
+                      <option value="Very Urgent">Very Urgent</option>
+                      <option value="Urgent">Urgent</option>
+                      <option value="Not Urgent">Not Urgent</option>
+                    </select>
+                  </div>
+                </div>
+                <p>{issue.isUrgent}</p>
+                <button onClick={this.handleUrgent}>set</button>
               </div>
-            </div>
-          </div>
-        ) : null}
-
-            <p>{issue.isUrgent}</p>
-         <button onClick={this.handleUrgent}>set</button>
+            ) : null}
           </div>
         </div>
+        {this.state.issue.images && this.state.issue.images[0] ? (
+          <img
+            src={`${this.state.issue.images && this.state.issue.images[0]}`}
+            style={{ width: 300 }}
+            className="card "
+          />
+
+        ) : null}
       </div>
     );
   }
 }
 
 export default connect(state => state.currentUser)(SingleIssue);
-

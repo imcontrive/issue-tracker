@@ -22,7 +22,7 @@ class UpdateIssue extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           title: data.issue.title,
           description: data.issue.description,

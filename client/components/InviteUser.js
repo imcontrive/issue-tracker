@@ -1,34 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState } from "react";
 
-export default class InviteUser extends Component {
+const InviteUser = function(props) {
+  const [email, setEmail] = useState("");
 
-  state= {
-    email:""
+  function handleChange(e) {
+    const { value } = e.target;
+    setEmail(value);
   }
 
-  handlechange =  e => {
-    let {name, value} = e.target;
-    this.setState({
-      [name] : value
-    })
+  function handleSubmit() {
+    props.history.push("/");
   }
 
-  handelInvite = () =>  {
-     const body=this.state.email;
-    fetch(`http://localhost:3000/api/v1/invites`,
-    {method:"POST",
-     body: JSON.stringify(body)})
-    .then(res => res.json())
-    .then(data => console.log(data))
-  }
+  return (
+    <>
+      <p className="subtitle">Invite User</p>
+      <input className="input" name="email" placeholder="Email" onChange={handleChange} />
+      <button className="button" onClick={handleSubmit}>Submit</button>
+    </>
+  );
+};
 
-
-  render() {
-    return (
-      <div>
-        <input name="email" value={this.state.email} placeholder="Enter email" onChange={this.handlechange}/>
-        <input type="submit" value="INVITE" onClick={this.handelInvite}/>
-      </div>
-    )
-  }
-}
+export default InviteUser;

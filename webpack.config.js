@@ -8,6 +8,7 @@ module.exports = {
   entry: [
     './client/index.js',
   ],
+  
   module: {
     rules: [
       {
@@ -25,6 +26,7 @@ module.exports = {
           { loader: 'sass-loader' }
         ]
       },
+      
       {
         test: /\.(png|jpg|gif)$/,
         use: [
@@ -54,5 +56,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "bundle.css",
     })
-  ]
+  ],
+  
 }

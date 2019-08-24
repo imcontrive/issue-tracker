@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
-import {currentUser, IssuesInfo} from "./currentUser";
-
-
-
+import {currentUser, IssuesInfo, imgReducer} from "./currentUser";
 
 const rootReducer = combineReducers({
   currentUser,
-  IssuesInfo
+  IssuesInfo,
+  imgReducer
 });
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -16,11 +16,9 @@ class Login extends Component {
   };
 
   loginHandler = e => {
-    console.log("login");
     e.preventDefault();
     const { email, password } = this.state;
     const body = { email, password };
-    console.log(body);
 
     fetch("http://localhost:3000/api/v1/users/login", {
       method: "POST",
@@ -31,26 +29,12 @@ class Login extends Component {
     })
       .then(res => {
         return res.status === 200
-          ? res
-              .json()
-              // then(user => {
-              //       // console.log(user)
-              //       localStorage.setItem("user",JSON.stringify(user));
-              //       this.setState({user})
-              //       this.props.history.push({
-              //         pathname: '/',
-              //         state: { user }
-              //       })
-              //     }
-              //       ):alert("something went wrong")
-              // }
-              .then(data => {
-                localStorage.setItem("token", data.token);
-                this.props.dispatch({ type: "USER_LOGIN_SUCCESS", data });
-                this.props.history.push("/");
-                console.log(data);
-              })
-          : console.log(res,"errror from backend")
+          ? res.json().then(data => {
+              localStorage.setItem("token", data.token);
+              this.props.dispatch({ type: "USER_LOGIN_SUCCESS", data });
+              this.props.history.push("/");
+            })
+          : console.log(res, "errror from backend");
       })
       .catch(error => console.error("Error:", error));
   };
@@ -95,17 +79,22 @@ class Login extends Component {
                     </span>
                   </p>
                 </div>
-                <div className="field is-grouped is-grouped-right">
-                  {
-                    this.state.email && this.state.password ?
-                  <button
-                    className="button is-primary"
-                    onClick={this.loginHandler}
-                  >
-                    Log in
-                  </button> : <p className="has-text-danger has-text-center">Plz fill all the filled</p>
-                  }
-                </div>
+
+                {this.state.email && this.state.password ? (
+                  <div className="field is-grouped is-grouped-right">
+                    <button
+                      className="button is-primary"
+                      onClick={this.loginHandler}
+                    >
+                      LOG IN
+                    </button>
+                  </div>
+                ) : (
+                  <p className="has-text-danger has-text-centered">
+                    Plz fill all the filled
+                  </p>
+                )}
+
                 <p className="has-text-centered">
                   <Link to="/register">Don't have an account? Sign Up</Link>
                 </p>

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom';
-import queryString from 'query-string';
-
-
+import { Link } from "react-router-dom";
+import queryString from "query-string";
 
 class Signup extends Component {
   state = {
@@ -11,22 +9,22 @@ class Signup extends Component {
     phonenumber: "",
     email: "",
     password: "",
-    cnfmPassword:"",
+    cnfmPassword: ""
   };
 
-  // Invitation handling in CDM 
-  componentDidMount(){
+  // Invitation handling in CDM
+  componentDidMount() {
     const refCode = queryString.parse(location.search).ref;
-    console.log(refCode, 'ref')
+    console.log(refCode, "ref");
     fetch(`http://localhost:3000/api/v1/invites/${refCode}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        this.setState({
-          email: data.user.email
-        })
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          this.setState({
+            email: data.user.email
+          });
+        }
+      });
   }
 
   changeHandler = e => {
@@ -47,17 +45,16 @@ class Signup extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(res => {
-        console.log(res, "cp");
+      .then(res => res.json())
+      .then(data => {
+        console.log(data, "cp");
         this.props.history.push("/Login");
       })
       .catch(error => console.error("Error:", error));
   };
 
-  
-
   render() {
-    const {firstname,lastname,phonenumber,email,password} = this.state;
+    const { firstname, lastname, phonenumber, email, password } = this.state;
     return (
       <React.Fragment>
         <section className="hero is-fullheight-with-navbar">
@@ -125,7 +122,7 @@ class Signup extends Component {
                       placeholder="email"
                       value={this.state.email}
                       onChange={this.changeHandler}
-                      readOnly={true}
+                      // readOnly={true}
                     />
                     <span className="icon is-small is-left">
                       <i className="fas fa-envelope" />
@@ -150,18 +147,22 @@ class Signup extends Component {
                     </span>
                   </p>
                 </div>
-                <div className="field is-grouped is-grouped-right">
-                  {
-                    firstname && lastname && phonenumber && email && password ?
-                    <button 
-                    className="button is-primary"
-                    onClick={this.signupHandler}
+
+                {firstname && lastname && phonenumber && email && password ? (
+                  <div className="field is-grouped is-grouped-right">
+                    <button
+                      className="button is-primary"
+                      onClick={this.signupHandler}
                     >
-                    SIGN UP
+                      SIGN UP
                     </button>
-                   : <p className="has-text-center has-text-danger">Please Fill all the field</p>
-                  }
-                </div>
+                  </div>
+                ) : (
+                  <p className="has-text-centered has-text-danger">
+                    Please Fill all the field
+                  </p>
+                )}
+
                 <p className="has-text-centered">
                   <Link to="/login">Already have an account? LogIn</Link>
                 </p>
