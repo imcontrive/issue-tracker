@@ -23,7 +23,7 @@ class HomePage extends Component {
     this.setState({ [name]: new Array(value) });
   };
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/issues", {
+    fetch("http://localhost:4000/api/v1/issues", {
       method: "GET",
       headers: {
         Authorization: `Token ${localStorage.token}`

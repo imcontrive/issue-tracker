@@ -14,7 +14,7 @@ class SingleIssue extends Component {
     // let isResolved = true
     let body = { isResolved: !this.state.isResolved };
     fetch(
-      `http://localhost:3000/api/v1/issues/${
+      `http://localhost:4000/api/v1/issues/${
         this.props.location.state.IssueId
       }`,
       {
@@ -49,7 +49,7 @@ class SingleIssue extends Component {
     let body = { isUrgent: this.state.isUrgent };
     // console.log(body,"body");
     fetch(
-      `http://localhost:3000/api/v1/issues/${
+      `http://localhost:4000/api/v1/issues/${
         this.props.location.state.IssueId
       }`,
       {
@@ -82,7 +82,7 @@ class SingleIssue extends Component {
     // let IssueId = this.props.history.location.state.IssueId
     // console.log(IssueId,"cdm si")
     fetch(
-      `http://localhost:3000/api/v1/issues/${this.props.location.state
+      `http://localhost:4000/api/v1/issues/${this.props.location.state
         .IssueId ||
         this.props.history.location.state.IssueId ||
         this.state.IssueId}`,

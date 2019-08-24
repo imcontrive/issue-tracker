@@ -11,7 +11,7 @@ class UpdateUser extends Component {
 
   componentDidMount() {
     fetch(
-      `http://localhost:3000/api/v1/users/${this.props.location.state.userId}`,
+      `http://localhost:4000/api/v1/users/${this.props.location.state.userId}`,
       {
         method: "GET",
         headers: {
@@ -44,7 +44,7 @@ class UpdateUser extends Component {
     const body = { firstname, lastname, email, phonenumber, password };
 
     fetch(
-      `http://localhost:3000/api/v1/users/update/${
+      `http://localhost:4000/api/v1/users/update/${
         this.props.location.state.userId
       }`,
       {

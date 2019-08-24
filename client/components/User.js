@@ -9,7 +9,7 @@ class User extends Component {
   componentDidMount() {
     console.log(this.props.location.state.userId);
     fetch(
-      `http://localhost:3000/api/v1/users/${this.props.location.state.userId}`,
+      `http://localhost:4000/api/v1/users/${this.props.location.state.userId}`,
       {
         method: "GET",
         headers: {

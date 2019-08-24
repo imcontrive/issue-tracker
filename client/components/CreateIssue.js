@@ -68,7 +68,7 @@ class createIssue extends Component {
     let isUrgent = "Not Urgent";
     const body = { title, description, category, createdBy, isUrgent, imgUrl };
 
-    fetch("http://localhost:3000/api/v1/issues", {
+    fetch("http://localhost:4000/api/v1/issues", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {

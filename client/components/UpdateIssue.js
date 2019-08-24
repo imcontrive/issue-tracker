@@ -10,7 +10,7 @@ class UpdateIssue extends Component {
 
   componentDidMount() {
     fetch(
-      `http://localhost:3000/api/v1/issues/${
+      `http://localhost:4000/api/v1/issues/${
         this.props.location.state.IssueId
       }`,
       {
@@ -48,7 +48,7 @@ class UpdateIssue extends Component {
     console.log(body, "user");
 
     fetch(
-      `http://localhost:3000/api/v1/issues/${
+      `http://localhost:4000/api/v1/issues/${
         this.props.location.state.IssueId
       }`,
       {

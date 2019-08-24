@@ -16,7 +16,7 @@ class Signup extends Component {
   componentDidMount() {
     const refCode = queryString.parse(location.search).ref;
     console.log(refCode, "ref");
-    fetch(`http://localhost:3000/api/v1/invites/${refCode}`)
+    fetch(`http://localhost:4000/api/v1/invites/${refCode}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -38,7 +38,7 @@ class Signup extends Component {
     e.preventDefault();
     const { firstname, lastname, email, phonenumber, password } = this.state;
     const body = { firstname, lastname, email, phonenumber, password };
-    fetch("http://localhost:3000/api/v1/users/register", {
+    fetch("http://localhost:4000/api/v1/users/register", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {

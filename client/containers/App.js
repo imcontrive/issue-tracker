@@ -10,7 +10,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3000/api/v1/users/me`, {
+    fetch(`http://localhost:4000/api/v1/users/me`, {
       method: "GET",
       headers: {
         Authorization: `Token ${localStorage.token}`

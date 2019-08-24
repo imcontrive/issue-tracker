@@ -21,7 +21,7 @@ class Login extends Component {
     const { email, password } = this.state;
     const body = { email, password };
 
-    fetch("http://localhost:3000/api/v1/users/login", {
+    fetch("http://localhost:4000/api/v1/users/login", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
