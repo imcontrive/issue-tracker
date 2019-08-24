@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    errorMsg:""
   };
 
   changeHandler = e => {
@@ -28,8 +29,10 @@ class Login extends Component {
       }
     })
       .then(res => {
+        console.log(res,"shubham is here")
         return res.status === 200
           ? res.json().then(data => {
+
               localStorage.setItem("token", data.token);
               this.props.dispatch({ type: "USER_LOGIN_SUCCESS", data });
               this.props.history.push("/");

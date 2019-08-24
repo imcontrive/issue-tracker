@@ -9,7 +9,6 @@ const issueAction = {
         .then(res => res.json())
         .then(ntfs => {
             socket.on('notification', (notifis) => {
-                console.log(notifis, 'ntfs in issue action')
             })
         })
     }
