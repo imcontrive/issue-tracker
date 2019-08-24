@@ -29,7 +29,6 @@ class Login extends Component {
       }
     })
       .then(res => {
-        console.log(res,"shubham is here")
         return res.status === 200
           ? res.json().then(data => {
 

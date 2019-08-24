@@ -110,7 +110,6 @@ class SingleIssue extends Component {
   render() {
     // console.log(this.state.issue);
     // console.log( this.props.history.location.state.IssueId);
-    console.log(this.state.issue, "cp");
 
     const issue = this.state.issue;
     return (
