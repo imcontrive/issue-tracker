@@ -25,6 +25,7 @@ class App extends Component {
 
   render() {
     return (
+
       <React.Fragment>
         <Header />
         {this.props.currentUser && this.props.currentUser._id ? (
@@ -33,6 +34,7 @@ class App extends Component {
           <Public />
         )}
       </React.Fragment>
+
     );
   }
 }

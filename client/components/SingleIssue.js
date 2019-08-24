@@ -79,6 +79,8 @@ class SingleIssue extends Component {
   };
 
   componentDidMount() {
+    // let IssueId = this.props.history.location.state.IssueId
+    // console.log(IssueId,"cdm si")
     fetch(
       `http://localhost:3000/api/v1/issues/${this.props.location.state
         .IssueId ||
@@ -91,6 +93,7 @@ class SingleIssue extends Component {
         }
       }
     )
+      // .then(res => console.log(res))
       .then(res => res.json())
 
       .then(data => {
