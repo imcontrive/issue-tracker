@@ -112,6 +112,7 @@ class SingleIssue extends Component {
     // console.log( this.props.history.location.state.IssueId);
 
     const issue = this.state.issue;
+    console.log("username",issue.createdBy)
     return (
       <div className="container">
         <div className="column is-half is-offset-one-quarter box has-background-light has-margin-top-25">
@@ -130,7 +131,7 @@ class SingleIssue extends Component {
                   state: { userId: issue.createdBy && issue.createdBy[0]._id }
                 }}
               >
-                <p>username</p>
+                <p>{issue.createdBy ? issue.createdBy[0].firstname :"UserName"}</p>
               </Link>
               <p>{issue.category}</p>
 
