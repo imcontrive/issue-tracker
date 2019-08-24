@@ -46,7 +46,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useNewUrlParser', true);
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost:27017/node_react_bp', function (err) {
+mongoose.connect('mongodb://localhost:27017/issue_trackr', function (err) {
   console.log('mongodb connected ?', err ? false : true);
 });
 
