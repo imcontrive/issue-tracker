@@ -187,7 +187,9 @@ class SingleIssue extends Component {
           <img
             src={`${this.state.issue.images && this.state.issue.images[0]}`}
             style={{ width: 300 }}
+            className="card "
           />
+
         ) : null}
       </div>
     );
