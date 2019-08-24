@@ -13,7 +13,6 @@ const issueAction = {
             })
         })
     }
-
 }
 
 export default issueAction;
