@@ -14,11 +14,10 @@ var jwt = require('jsonwebtoken');
 // routes for user registration
 router.post('/register', (req, res) => {
   User.create(req.body, (err, user) => {
-    console.log(req.body, 'register')
     if(err) return res.json(err);
     jwt.sign({userId: user.id}, process.env.SECRET, (err, token) => {
       if(err) return res.json({succees: false});
-      return res.status(201).json({success:true, message: "user registered" ,token: token});
+      return res.status(201).json({success:true, message: "Your are succesfully registered." ,token: token});
     })
   })
 })
@@ -34,21 +33,19 @@ router.get('/me',auth.verifyToken, (req,res) => {
 })
 
 router.post('/login', (req, res) => {
-  console.log(process.env.SECRET);
   const data = req.body;
   User.findOne({ email: data.email }, (err, user) => {
     if (err) return res.status(500).json({ success: false, error: "server error" });
     if(!user) {
-      return res.status(400).json({ success: false, error: "user not found" });
+      return res.status(400).json({ success: false, error: "Please enter a valid email" });
     }
     if(user){
       var result = bcrypt.compareSync(data.password, user.password);
       if(result){
-        // console.log(process.env.SECRET, 'secret')
         var token = jwt.sign({ _id: user._id }, process.env.SECRET);
         return res.status(200).json({success: true,token: token, user});
       }else {
-        return res.status(400).json({success: false, error: "invalid password" });
+        return res.status(400).json({success: false, error: "Invalid Password" });
       }
     }
  })
