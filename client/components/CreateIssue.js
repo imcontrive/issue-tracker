@@ -83,7 +83,11 @@ class createIssue extends Component {
           this.setState({
             isLoading: false
           });
-          this.props.history.push("/");
+          this.props.dispatch(issueAction.getNotifications(socket, (done) =>{
+            if (done) {
+              this.props.history.push("/");            
+            }
+          }));
         }
       })
       .catch(error => console.error("Error:", error));

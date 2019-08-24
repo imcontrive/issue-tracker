@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const nodemailer = require('nodemailer');
 var Issue = require("../../models/Issue");
 var Notification = require("../../models/Notification");
 const ntfsController = require("../../controller/notification.controller").notify();
@@ -19,6 +20,44 @@ router.get("/", auth.verifyToken, (req, res) => {
       if (err) res.status(500).json(err);
       // console.log(issues, "all issues");
       res.status(200).json({ success: true, Issues: issues });
+    });
+});
+
+router.post("/mail", (req, res) => {
+  const id = req.body.issue._id;
+
+  const smtpTransport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: "alt.issuetrackr@gmail.com",
+      pass: process.env.PASS
+    }
+  });
+  
+  Issue.findOne({ _id: id })
+    .populate("createdBy")
+    .select("-password")
+    .exec((err, issue) => {
+      if (err) {
+        return res.json(err);
+      } else {
+        let mailOptions = {
+          to: process.env.EMAIL,
+          subject: `${issue.createdBy[0].firstname} ${issue.createdBy[0].lastname} created a issue`,
+       html: `The issue is <br>${issue.title}<br>${issue.description}`
+        };
+        smtpTransport.sendMail(mailOptions, (err, info) => {
+          if (err) {
+            return res.status(406).json({
+              error: "Encountered a problem while sending the invitation email"
+            });
+          }
+          return res.json({
+            success: true
+            // message: `Invitation email sent to ${mailOptions.to}`});
+          });
+        });
+      }
     });
 });
 

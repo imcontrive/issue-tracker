@@ -32,7 +32,7 @@ class HomePage extends Component {
       .then(res => res.json())
       // .then(data => console.log(data))
       .then(data => this.setState({ issues: data }));
-      this.props.dispatch(issueAction.getNotifications(socket))
+      // this.props.dispatch(issueAction.getNotifications(socket))
   }
 
   render() {

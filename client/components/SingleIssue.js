@@ -128,7 +128,12 @@ class SingleIssue extends Component {
                   state: { userId: issue.createdBy && issue.createdBy[0]._id }
                 }}
               >
-                <p>username</p>
+                {
+                  issue.createdBy ? <p>{issue.createdBy[0].firstname}</p>
+                  :
+                  null
+                }
+                
               </Link>
               <p>{issue.category}</p>
 
