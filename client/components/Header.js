@@ -18,9 +18,7 @@ class Header extends Component {
   };
 
   render() {
-    // console.log(this.props.state.currentUser.user);
     const { user } = this.props.state.currentUser;
-    console.log(user, "check");
     return (
       <nav
         className="navbar has-shadow has-background-grey-lighter"

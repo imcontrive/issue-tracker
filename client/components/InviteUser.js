@@ -6,18 +6,17 @@ const InviteUser = function(props) {
   function handleChange(e) {
     const { value } = e.target;
     setEmail(value);
-  };
+  }
 
-  function handleSubmit(){
-    console.log(email)
-    props.history.push("/")
+  function handleSubmit() {
+    props.history.push("/");
   }
 
   return (
     <>
-      <p>Invite User</p>
-      <input name="email" placeholder="Email" onChange={handleChange} />
-      <button onClick={handleSubmit}>Submit</button>
+      <p className="subtitle">Invite User</p>
+      <input className="input" name="email" placeholder="Email" onChange={handleChange} />
+      <button className="button" onClick={handleSubmit}>Submit</button>
     </>
   );
 };

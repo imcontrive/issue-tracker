@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import imgActions from "../actions/imgActions";
 import keys from "../../key";
 import issueAction from "../actions/issue.action";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 const socket = io();
 
 class createIssue extends Component {
@@ -78,7 +78,6 @@ class createIssue extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        // console.log(data, 'data in create issue');
         if (data.success) {
          
           this.props.dispatch(issueAction.getNotifications(socket, (done) =>{

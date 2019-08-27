@@ -18,13 +18,13 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data, "inside app");
         this.props.dispatch({ type: "USER_RELOAD", data });
       });
   }
 
   render() {
     return (
+
       <React.Fragment>
         <Header />
         {this.props.currentUser && this.props.currentUser._id ? (
@@ -33,6 +33,7 @@ class App extends Component {
           <Public />
         )}
       </React.Fragment>
+
     );
   }
 }
