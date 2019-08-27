@@ -80,11 +80,12 @@ class createIssue extends Component {
       .then(data => {
         // console.log(data, 'data in create issue');
         if (data.success) {
-          this.setState({
-            isLoading: false
-          });
+         
           this.props.dispatch(issueAction.getNotifications(socket, (done) =>{
             if (done) {
+              this.setState({
+                isLoading: false
+              });
               this.props.history.push("/");            
             }
           }));
