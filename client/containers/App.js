@@ -10,21 +10,22 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3000/api/v1/users/me`, {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${localStorage.token}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.props.dispatch({ type: "USER_RELOAD", data });
-      });
+    if(localStorage.token){
+      fetch(`http://localhost:3000/api/v1/users/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${localStorage.token}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          this.props.dispatch({ type: "USER_RELOAD", data });
+        });
+    }
   }
 
   render() {
     return (
-
       <React.Fragment>
         <Header />
         {this.props.currentUser && this.props.currentUser._id ? (
