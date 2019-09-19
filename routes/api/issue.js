@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 var Issue = require("../../models/Issue");
 var Notification = require("../../models/Notification");
-const ntfsController = require("../../controller/notification.controller").notify();
+const ntfsController = require("../../controller/notification.controller").notify;
 var auth = require("../../utils/verifyToken");
 
 // router.use(auth.verifyToken);
@@ -33,7 +33,7 @@ router.post("/mail", (req, res) => {
       pass: process.env.PASS
     }
   });
-  
+
   Issue.findOne({ _id: id })
     .populate("createdBy")
     .select("-password")
@@ -44,7 +44,7 @@ router.post("/mail", (req, res) => {
         let mailOptions = {
           to: process.env.EMAIL,
           subject: `${issue.createdBy[0].firstname} ${issue.createdBy[0].lastname} created a issue`,
-       html: `The issue is <br>${issue.title}<br>${issue.description}`
+          html: `The issue is <br>${issue.title}<br>${issue.description}`
         };
         smtpTransport.sendMail(mailOptions, (err, info) => {
           if (err) {

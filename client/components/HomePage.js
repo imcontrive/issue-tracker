@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import io from "socket.io-client";
 import Sidebar from "./Sidebar";
-import issueAction from "../actions/issue.action";
-const socket = io();
 
 class HomePage extends Component {
   state = {
@@ -33,7 +30,6 @@ class HomePage extends Component {
       .then(res => res.json())
 
       .then(data => this.setState({ issues: data }));
-    this.props.dispatch(issueAction.getNotifications(socket));
   }
 
   render() {

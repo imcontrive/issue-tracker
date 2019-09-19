@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import imgActions from "../actions/imgActions";
 import keys from "../../key";
 import issueAction from "../actions/issue.action";
-import io from "socket.io-client";
-const socket = io();
 
 class createIssue extends Component {
   state = {
@@ -79,15 +77,16 @@ class createIssue extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-         
-          this.props.dispatch(issueAction.getNotifications(socket, (done) =>{
-            if (done) {
-              this.setState({
-                isLoading: false
-              });
-              this.props.history.push("/");            
-            }
-          }));
+          this.props.dispatch(
+            issueAction.getNotifications(socket, done => {
+              if (done) {
+                this.setState({
+                  isLoading: false
+                });
+                this.props.history.push("/");
+              }
+            })
+          );
         }
       })
       .catch(error => console.error("Error:", error));
@@ -155,7 +154,7 @@ class createIssue extends Component {
           </div>
         ) : (
           <>
-            <p>creating issue</p>
+            <p>raising issue</p>
             <a className="button is-info is-loading">creating issue</a>
           </>
         )}
